@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comunicaciones · Guía interactiva de fórmulas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- KaTeX empaquetado localmente en vendor/katex: la página funciona sin conexión a internet -->
+<link rel="stylesheet" href="vendor/katex/katex.min.css">
+<script src="vendor/katex/katex.min.js"></script>
+<style>
+:root{
+  --bg:#F5F7F3;
+  --bg-2:#EDF1EB;
+  --panel:#FFFFFF;
+  --panel-2:#F1F5F0;
+  --line:#DCE4D9;
+  --line-soft:#E7EDE5;
+  --ink:#16241E;
+  --ink-dim:#4E5F56;
+  --ink-faint:#8B9A91;
+  --amber:#A85A18;
+  --amber-dim:#7C4310;
+  --amber-soft:#F5E7D6;
+  --teal:#0E7C66;
+  --teal-dim:#0B5C4C;
+  --teal-soft:#E3F1EC;
+  --red:#B3261E;
+  --scope-bg:#122019;
+  --scope-line:#25382F;
+  --scope-ink:#E4F0E9;
+  --mono:'IBM Plex Mono', ui-monospace, monospace;
+  --sans:'IBM Plex Sans', system-ui, sans-serif;
+  --disp:'Space Grotesk', var(--sans);
+  --radius:3px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:
+    repeating-linear-gradient(0deg, rgba(14,124,102,0.05) 0px, rgba(14,124,102,0.05) 1px, transparent 1px, transparent 28px),
+    repeating-linear-gradient(90deg, rgba(14,124,102,0.05) 0px, rgba(14,124,102,0.05) 1px, transparent 1px, transparent 28px),
+    var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:15px;
+  line-height:1.6;
+  min-height:100vh;
+}
+::selection{background:var(--amber-soft);color:var(--ink);}
+a{color:var(--teal);}
+h1,h2,h3,h4{font-family:var(--disp);font-weight:600;color:var(--ink);margin:0 0 .4em 0;letter-spacing:.2px;}
+.katex{font-size:1.08em;}
+
+/* ---------- layout shell ---------- */
+#shell{display:flex;min-height:100vh;}
+
+#sidebar{
+  width:272px;flex:none;
+  background:linear-gradient(180deg,#EFF4ED,var(--bg));
+  border-right:1px solid var(--line);
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  padding:0 0 24px 0;
+}
+#sidebar::-webkit-scrollbar{width:8px;}
+#sidebar::-webkit-scrollbar-thumb{background:var(--line);border-radius:4px;}
+
+.brand{
+  padding:22px 20px 16px 20px;border-bottom:1px solid var(--line);
+}
+.brand .tag{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:1.5px;color:var(--amber);
+  display:flex;align-items:center;gap:8px;margin-bottom:8px;
+}
+.brand .tag .dot{width:7px;height:7px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px rgba(168,90,24,.45);animation:blink 2.6s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:.35;}}
+.brand h1{font-size:20px;line-height:1.25;margin:0;}
+.brand p{color:var(--ink-dim);font-size:12.5px;margin:8px 0 0 0;}
+
+nav.units{padding:10px 10px;}
+.unit-link{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:9px 10px;border-radius:var(--radius);
+  color:var(--ink-dim);text-decoration:none;cursor:pointer;
+  border-left:2px solid transparent;
+  font-size:13.5px;
+}
+.unit-link:hover{background:var(--panel);color:var(--ink);}
+.unit-link.active{background:var(--panel);color:var(--ink);border-left:2px solid var(--amber);box-shadow:0 1px 3px rgba(22,36,30,.08);}
+.unit-link .n{
+  font-family:var(--mono);font-size:11px;color:var(--teal);flex:none;
+  width:20px;padding-top:1px;
+}
+.unit-link .t{flex:1;}
+.unit-link .t small{display:block;color:var(--ink-faint);font-size:10.5px;margin-top:2px;}
+
+.sidebar-foot{padding:14px 20px;border-top:1px solid var(--line);margin-top:6px;}
+.sidebar-foot .search{
+  width:100%;background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  padding:8px 10px;border-radius:var(--radius);font-family:var(--sans);font-size:13px;
+}
+.sidebar-foot .search::placeholder{color:var(--ink-faint);}
+.sidebar-foot .hint{font-size:10.5px;color:var(--ink-faint);margin-top:6px;font-family:var(--mono);}
+
+/* ---------- main ---------- */
+main{flex:1;min-width:0;padding:0;}
+.topbar{
+  position:sticky;top:0;z-index:5;
+  background:rgba(245,247,243,0.88);backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+  padding:14px 42px;display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.topbar .crumb{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.4px;}
+.topbar .crumb b{color:var(--teal);font-weight:500;}
+.topbar .nav-btns button{
+  background:var(--panel);border:1px solid var(--line);color:var(--ink-dim);
+  font-family:var(--mono);font-size:11px;padding:6px 11px;border-radius:var(--radius);cursor:pointer;
+}
+.topbar .nav-btns button:hover{border-color:var(--teal);color:var(--teal);}
+
+.content{max-width:920px;margin:0 auto;padding:42px 42px 120px 42px;}
+
+section.unit{display:none;}
+section.unit.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+.unit-head{margin-bottom:30px;}
+.unit-head .eyebrow{font-family:var(--mono);color:var(--amber);font-size:12px;letter-spacing:1px;}
+.unit-head h2{font-size:30px;margin-top:4px;}
+.unit-head .desc{color:var(--ink-dim);max-width:66ch;margin-top:10px;font-size:14.5px;}
+
+/* topic block (non formula, conceptual) */
+.topic-block{
+  background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--radius);
+  padding:20px 22px;margin-bottom:22px;box-shadow:0 1px 2px rgba(22,36,30,.04);
+}
+.topic-block h3{font-size:16px;color:var(--teal);}
+.topic-block p{color:var(--ink-dim);font-size:14px;}
+
+/* formula card */
+.fcard{
+  border:1px solid var(--line);border-radius:var(--radius);
+  background:var(--panel);
+  margin-bottom:24px;overflow:hidden;
+  scroll-margin-top:80px;
+  box-shadow:0 1px 3px rgba(22,36,30,.05);
+}
+.fcard.pulse{animation:pulse 1.4s ease;}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(168,90,24,.45);}70%{box-shadow:0 0 0 10px rgba(168,90,24,0);}100%{box-shadow:0 0 0 0 rgba(168,90,24,0);}}
+.fcard-head{
+  padding:16px 22px 14px 22px;border-bottom:1px solid var(--line-soft);
+  display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  background:var(--panel-2);
+}
+.fcard-head .id{font-family:var(--mono);font-size:10.5px;color:var(--ink-faint);margin-bottom:3px;}
+.fcard-head h3{font-size:17px;margin:0;}
+.fcard-body{padding:20px 22px 8px 22px;}
+.formula-box{
+  background:var(--scope-bg);border:1px solid var(--scope-line);border-radius:var(--radius);
+  padding:20px;margin-bottom:16px;overflow-x:auto;text-align:center;color:var(--scope-ink);
+}
+.vars{margin:14px 0;font-size:13.5px;color:var(--ink-dim);}
+.vars .vrow{display:flex;gap:10px;padding:3px 0;}
+.vars .vrow .sym{font-family:var(--mono);color:var(--amber);min-width:64px;flex:none;}
+.explain p{color:var(--ink-dim);font-size:14px;margin:0 0 10px 0;}
+.explain{margin-bottom:6px;}
+.example{
+  background:var(--teal-soft);border-left:2px solid var(--teal-dim);
+  padding:10px 14px;font-size:13px;color:var(--ink-dim);margin:14px 0;border-radius:0 var(--radius) var(--radius) 0;
+}
+.example b{color:var(--teal-dim);}
+
+/* calculators */
+.calc{
+  margin:16px 0 6px 0;border-top:1px dashed var(--line);padding-top:16px;
+}
+.calc .calc-label{font-family:var(--mono);font-size:10.5px;color:var(--amber-dim);letter-spacing:1px;margin-bottom:10px;}
+.calc .row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:12px;}
+.calc .field{display:flex;flex-direction:column;gap:4px;min-width:130px;flex:1;}
+.calc .field label{font-size:11.5px;color:var(--ink-faint);font-family:var(--mono);}
+.calc .field input, .calc .field select, .calc textarea{
+  background:var(--panel);border:1px solid var(--line);color:var(--ink);
+  padding:8px 10px;border-radius:var(--radius);font-family:var(--mono);font-size:13.5px;
+}
+.calc .field input:focus,.calc .field select:focus,.calc textarea:focus{outline:none;border-color:var(--teal);}
+.calc-out{
+  background:var(--scope-bg);border:1px solid var(--scope-line);border-radius:var(--radius);
+  padding:12px 16px;font-family:var(--mono);font-size:14px;color:#8FE6CC;
+  display:flex;flex-wrap:wrap;gap:20px;
+}
+.calc-out .oitem .l{color:#9DB8AC;font-size:10.5px;display:block;}
+.calc-out .oitem .v{font-size:15.5px;}
+.calc-out.err{color:#FFA69C;border-color:#5A2A24;}
+
+/* cross references */
+.xref{margin:18px 0 4px 0;}
+.xref .xref-label{font-size:10.5px;font-family:var(--mono);color:var(--ink-faint);letter-spacing:1px;margin-bottom:8px;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  font-family:var(--mono);font-size:11.5px;color:var(--teal-dim);
+  background:var(--teal-soft);border:1px solid #BFE0D4;
+  padding:5px 10px;border-radius:20px;cursor:pointer;white-space:nowrap;
+}
+.chip:hover{background:#D3EBE2;}
+.chip .u{color:var(--amber);margin-right:5px;}
+
+/* map page */
+.map-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:18px;}
+.map-table th,.map-table td{border:1px solid var(--line-soft);padding:8px 10px;text-align:center;}
+.map-table th{background:var(--ink);font-family:var(--mono);font-weight:500;color:#EAF2ED;font-size:11px;}
+.map-table td.concept{text-align:left;font-family:var(--sans);color:var(--ink);background:var(--panel-2);}
+.map-table td.yes{color:var(--amber-dim);font-weight:600;background:var(--amber-soft);}
+.map-table td.no{color:var(--line);}
+
+/* diagram (unit 1) */
+.diagram{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin:22px 0;}
+.dblock{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  padding:14px 16px;min-width:110px;text-align:center;cursor:pointer;flex:1;
+}
+.dblock:hover{border-color:var(--teal);box-shadow:0 1px 3px rgba(22,36,30,.08);}
+.dblock .name{font-family:var(--disp);font-size:13.5px;color:var(--ink);}
+.dblock .link{font-size:10px;color:var(--ink-faint);font-family:var(--mono);margin-top:6px;}
+.arrow{color:var(--ink-faint);font-size:18px;flex:none;}
+
+/* intro landing */
+.hero{padding-bottom:10px;}
+.hero .kicker{font-family:var(--mono);color:var(--amber);font-size:12.5px;letter-spacing:1.5px;}
+.hero h2{font-size:36px;max-width:18ch;margin-top:10px;}
+.hero p{color:var(--ink-dim);max-width:62ch;font-size:15px;}
+.hero-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:30px;}
+.hero-card{
+  background:var(--panel);border:1px solid var(--line-soft);border-radius:var(--radius);
+  padding:16px 18px;cursor:pointer;box-shadow:0 1px 2px rgba(22,36,30,.04);
+}
+.hero-card:hover{border-color:var(--amber-dim);box-shadow:0 2px 6px rgba(22,36,30,.08);}
+.hero-card .num{font-family:var(--mono);color:var(--teal);font-size:11px;}
+.hero-card .t{font-family:var(--disp);font-size:14.5px;margin-top:6px;}
+.hero-card .c{font-size:11.5px;color:var(--ink-faint);margin-top:4px;}
+
+footer.credit{margin-top:60px;padding-top:18px;border-top:1px solid var(--line-soft);color:var(--ink-faint);font-size:11.5px;font-family:var(--mono);}
+
+@media (max-width:860px){
+  #sidebar{position:fixed;left:-272px;transition:left .25s ease;z-index:20;box-shadow:0 0 40px rgba(22,36,30,.25);}
+  #sidebar.open{left:0;}
+  .content{padding:26px 18px 100px 18px;}
+  .topbar{padding:12px 16px;}
+  #menu-btn{display:inline-flex !important;}
+  .hero-grid{grid-template-columns:1fr;}
+}
+#menu-btn{display:none;background:var(--panel);border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:var(--radius);align-items:center;justify-content:center;cursor:pointer;}
+</style>
+</head>
+<body>
+<div id="shell">
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="tag"><span class="dot"></span>UTN-FRT · ISI</div>
+      <h1>Sistemas de<br>Comunicación</h1>
+      <p>Guía interactiva de fórmulas — Unidades 1 a 9</p>
+    </div>
+    <nav class="units" id="unit-nav"></nav>
+    <div class="sidebar-foot">
+      <input class="search" id="search-box" type="text" placeholder="Buscar fórmula, ej: Shannon, dB, CRC…">
+      <div class="hint">↵ salta al primer resultado</div>
+    </div>
+  </aside>
+
+  <main>
+    <div class="topbar">
+      <button id="menu-btn" aria-label="menú">☰</button>
+      <div class="crumb" id="crumb">INICIO</div>
+      <div class="nav-btns">
+        <button onclick="goTo('mapa')">Mapa de conexiones</button>
+      </div>
+    </div>
+    <div class="content" id="content"></div>
+  </main>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
