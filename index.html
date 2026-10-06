@@ -28,9 +28,9 @@
   --teal-dim:#0B5C4C;
   --teal-soft:#E3F1EC;
   --red:#B3261E;
-  --scope-bg:#122019;
-  --scope-line:#25382F;
-  --scope-ink:#E4F0E9;
+  --scope-bg:#EFF6F2;
+  --scope-line:#CFE3D9;
+  --scope-ink:#16241E;
   --mono:'IBM Plex Mono', ui-monospace, monospace;
   --sans:'IBM Plex Sans', system-ui, sans-serif;
   --disp:'Space Grotesk', var(--sans);
@@ -103,6 +103,22 @@ nav.units{padding:10px 10px;}
 }
 .sidebar-foot .search::placeholder{color:var(--ink-faint);}
 .sidebar-foot .hint{font-size:10.5px;color:var(--ink-faint);margin-top:6px;font-family:var(--mono);}
+.search-wrap{position:relative;}
+.search-suggest{
+  display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);z-index:30;
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:0 6px 18px rgba(22,36,30,.14);max-height:260px;overflow-y:auto;
+}
+.search-suggest.open{display:block;}
+.search-suggest .sitem{
+  padding:9px 12px;cursor:pointer;display:flex;flex-direction:column;gap:2px;
+  border-bottom:1px solid var(--line-soft);
+}
+.search-suggest .sitem:last-child{border-bottom:none;}
+.search-suggest .sitem .n{font-size:13px;color:var(--ink);}
+.search-suggest .sitem .u{font-family:var(--mono);font-size:10px;color:var(--teal);}
+.search-suggest .sitem:hover,.search-suggest .sitem.active{background:var(--teal-soft);}
+.search-suggest .empty{padding:10px 12px;font-size:12px;color:var(--ink-faint);}
 
 /* ---------- main ---------- */
 main{flex:1;min-width:0;padding:0;}
@@ -110,7 +126,7 @@ main{flex:1;min-width:0;padding:0;}
   position:sticky;top:0;z-index:5;
   background:rgba(245,247,243,0.88);backdrop-filter:blur(6px);
   border-bottom:1px solid var(--line);
-  padding:14px 42px;display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:14px 42px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
 }
 .topbar .crumb{font-family:var(--mono);font-size:11.5px;color:var(--ink-faint);letter-spacing:.4px;}
 .topbar .crumb b{color:var(--teal);font-weight:500;}
@@ -187,12 +203,12 @@ section.unit.active{display:block;animation:fade .35s ease;}
 .calc .field input:focus,.calc .field select:focus,.calc textarea:focus{outline:none;border-color:var(--teal);}
 .calc-out{
   background:var(--scope-bg);border:1px solid var(--scope-line);border-radius:var(--radius);
-  padding:12px 16px;font-family:var(--mono);font-size:14px;color:#8FE6CC;
+  padding:12px 16px;font-family:var(--mono);font-size:14px;color:var(--teal-dim);
   display:flex;flex-wrap:wrap;gap:20px;
 }
-.calc-out .oitem .l{color:#9DB8AC;font-size:10.5px;display:block;}
+.calc-out .oitem .l{color:#6E8077;font-size:10.5px;display:block;}
 .calc-out .oitem .v{font-size:15.5px;}
-.calc-out.err{color:#FFA69C;border-color:#5A2A24;}
+.calc-out.err{color:var(--red);border-color:#E3B7B2;background:#FBEEEC;}
 
 /* cross references */
 .xref{margin:18px 0 4px 0;}
@@ -207,11 +223,13 @@ section.unit.active{display:block;animation:fade .35s ease;}
 .chip .u{color:var(--amber);margin-right:5px;}
 
 /* map page */
-.map-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:18px;}
+.map-scroll{overflow-x:auto;margin-top:18px;-webkit-overflow-scrolling:touch;}
+.map-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:620px;}
 .map-table th,.map-table td{border:1px solid var(--line-soft);padding:8px 10px;text-align:center;}
 .map-table th{background:var(--ink);font-family:var(--mono);font-weight:500;color:#EAF2ED;font-size:11px;}
 .map-table td.concept{text-align:left;font-family:var(--sans);color:var(--ink);background:var(--panel-2);}
-.map-table td.yes{color:var(--amber-dim);font-weight:600;background:var(--amber-soft);}
+.map-table td.yes{color:var(--amber-dim);font-weight:600;background:var(--amber-soft);cursor:pointer;}
+.map-table td.yes:hover{background:#ECD4AE;}
 .map-table td.no{color:var(--line);}
 
 /* diagram (unit 1) */
@@ -243,14 +261,28 @@ section.unit.active{display:block;animation:fade .35s ease;}
 footer.credit{margin-top:60px;padding-top:18px;border-top:1px solid var(--line-soft);color:var(--ink-faint);font-size:11.5px;font-family:var(--mono);}
 
 @media (max-width:860px){
-  #sidebar{position:fixed;left:-272px;transition:left .25s ease;z-index:20;box-shadow:0 0 40px rgba(22,36,30,.25);}
+  #sidebar{position:fixed;left:-272px;top:0;transition:left .25s ease;z-index:20;box-shadow:0 0 40px rgba(22,36,30,.25);}
   #sidebar.open{left:0;}
   .content{padding:26px 18px 100px 18px;}
   .topbar{padding:12px 16px;}
   #menu-btn{display:inline-flex !important;}
   .hero-grid{grid-template-columns:1fr;}
+  .fcard-body{padding:18px 16px 8px 16px;}
+  .fcard-head{padding:14px 16px 12px 16px;}
 }
-#menu-btn{display:none;background:var(--panel);border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:var(--radius);align-items:center;justify-content:center;cursor:pointer;}
+@media (max-width:480px){
+  .content{padding:18px 12px 90px 12px;}
+  .unit-head h2{font-size:24px;}
+  .hero h2{font-size:26px;}
+  .fcard-head h3{font-size:15.5px;}
+  .formula-box{padding:14px 10px;}
+  .katex{font-size:0.92em;}
+  .calc .field{min-width:100%;}
+  .calc-out{gap:12px;}
+  .topic-block{padding:16px;}
+  .dblock{min-width:90px;padding:10px 10px;}
+}
+#menu-btn{display:none;background:var(--panel);border:1px solid var(--line);color:var(--ink);width:34px;height:34px;border-radius:var(--radius);align-items:center;justify-content:center;cursor:pointer;flex:none;}
 </style>
 </head>
 <body>
@@ -263,8 +295,11 @@ footer.credit{margin-top:60px;padding-top:18px;border-top:1px solid var(--line-s
     </div>
     <nav class="units" id="unit-nav"></nav>
     <div class="sidebar-foot">
-      <input class="search" id="search-box" type="text" placeholder="Buscar fórmula, ej: Shannon, dB, CRC…">
-      <div class="hint">↵ salta al primer resultado</div>
+      <div class="search-wrap">
+        <input class="search" id="search-box" type="text" autocomplete="off" placeholder="Buscar fórmula, ej: Shannon, dB, CRC…">
+        <div class="search-suggest" id="search-suggest"></div>
+      </div>
+      <div class="hint">↑↓ para moverte · ↵ para saltar</div>
     </div>
   </aside>
 
