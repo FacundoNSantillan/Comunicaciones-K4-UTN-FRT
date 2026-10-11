@@ -12,12 +12,12 @@ const UNITS = [
     isConceptual: true,
     formulas: [],
     topics: [
-      {title:"Objetivos de un sistema de comunicaciones", html:"<p>Intercambiar información entre dos o más entidades. Toda transmisión de datos requiere hardware y software organizados en un sistema de comunicación, cuya efectividad depende de cuatro características: entrega, exactitud, puntualidad y retardo variable (jitter).</p>"},
-      {title:"Esquema de bloques", html:"<p><b>Fuente</b> (genera la información) → <b>Transmisor</b> (codifica/transforma la señal para el canal) → <b>Canal</b> (medio de transmisión, con una fuente de ruido asociada) → <b>Receptor</b> (decodifica) → <b>Destino</b>. Cada uno de estos bloques es, en rigor, el título de una de las unidades siguientes — hacé clic en cualquier bloque del diagrama de arriba.</p>"},
-      {title:"Modos de transmisión: simplex, half-duplex y full-duplex", html:"<p>Según el sentido en que puede circular la información entre dos puntos: <b>simplex</b> (un solo sentido, siempre — ej. radio FM), <b>half-duplex o semidúplex</b> (los dos sentidos, pero no al mismo tiempo — ej. un walkie-talkie) y <b>full-duplex</b> (los dos sentidos simultáneamente — ej. una llamada telefónica). Esta clasificación no es un detalle menor: en la Unidad 8/9 el ancho de banda disponible para un módem en modo full-duplex se divide al medio entre ambos sentidos, mientras que en half-duplex cada sentido puede usarlo entero (pero de a uno por vez).</p>"},
-      {title:"Transmisión en banda base vs. transmisión modulada", html:"<p>Una señal digital se puede enviar <b>en banda base</b> (los pulsos de bits viajan tal cual, codificados con algún código de línea — ver Unidad 7) o <b>modulada</b> (se usa como información para variar amplitud/frecuencia/fase de una onda portadora de mayor frecuencia — ver Unidad 8). La banda base es más simple pero ocupa el espectro desde 0 Hz, lo que la hace poco práctica para medios inalámbricos o para compartir un mismo cable entre varias señales; la modulación traslada la señal a una banda de frecuencias determinada, permitiendo multicanalización (FDM) y transmisión a distancia.</p>"},
-      {title:"Clasificación de redes: alcance y topología", html:"<p>Por <b>alcance</b>: PAN (personal, unos metros), LAN (local, un edificio), MAN (metropolitana, una ciudad) y WAN (amplia, un país o el mundo — Internet es la WAN por excelencia). Por <b>topología física</b> (cómo están conectados los nodos entre sí): bus (todos comparten un mismo cable), estrella (todos contra un nodo central), anillo (cada nodo conectado a los dos vecinos, cerrando un círculo), malla (conexiones redundantes punto a punto) y árbol (jerarquía de estrellas). La topología elegida afecta directamente la tolerancia a fallas y el costo de cableado.</p>"},
-      {title:"Medios de transmisión guiados y no guiados", html:"<p>Se clasifican en <b>guiados</b> — par trenzado (UTP/STP, categorías 5e/6/6a), cable coaxial y fibra óptica (monomodo/multimodo) — y <b>no guiados</b> — radio, microondas, satélite, infrarrojo. Cada uno tiene un ancho de banda y una atenuación típica muy distintos (ej. par trenzado ≈3 dB/km, coaxial ≈7 dB/km, fibra óptica ≈0,2–0,5 dB/km): esos valores son justamente el insumo numérico de las fórmulas de atenuación de la Unidad 3.</p>"}
+      {title:"Objetivos de un sistema de comunicaciones", html:"<p>La idea de fondo es simple: hacer que dos puntos intercambien información. Para que eso funcione bien, un sistema tiene que cumplir cuatro cosas: entregar los datos, que lleguen sin errores, a tiempo, y sin saltos raros en la demora (jitter).</p>"},
+      {title:"Esquema de bloques", html:"<p><b>Fuente</b> → <b>Transmisor</b> → <b>Canal</b> → <b>Receptor</b> → <b>Destino</b>. La fuente genera la información, el transmisor la adapta para poder viajar por el canal, el canal es el medio físico (con su ruido), el receptor la decodifica del otro lado y el destino la recibe. Cada bloque es, básicamente, el tema de una unidad distinta — probá clickear alguno en el diagrama de arriba.</p>"},
+      {title:"Simplex, half-duplex y full-duplex", html:"<p>Tres formas de repartir el sentido de la comunicación: <b>simplex</b> es un solo sentido siempre (la radio FM), <b>half-duplex</b> son los dos sentidos pero de a uno por vez (un walkie-talkie), y <b>full-duplex</b> son los dos al mismo tiempo (una llamada). No es solo una categoría: en full-duplex el ancho de banda se reparte entre ambos sentidos, en half-duplex cada uno lo usa entero, pero turnándose.</p>"},
+      {title:"Banda base vs. modulada", html:"<p>Una señal digital se puede mandar <b>en banda base</b> (los bits viajan tal cual, con algún código de línea — Unidad 7) o <b>modulada</b> (los bits varían la amplitud, frecuencia o fase de una portadora — Unidad 8). Banda base es más simple, pero ocupa el espectro desde 0 Hz, así que no sirve para inalámbrico ni para compartir un cable. Modular la traslada a una banda de frecuencia específica, lo que permite multicanalizar y transmitir a distancia.</p>"},
+      {title:"Alcance y topología de una red", html:"<p>Por alcance: PAN (personal), LAN (un edificio), MAN (una ciudad) y WAN (un país o el mundo — Internet, básicamente). Por topología física, cómo están cableados los nodos entre sí: bus (un cable compartido), estrella (todos contra un nodo central), anillo (en círculo), malla (todos con todos) y árbol (estrellas jerarquizadas). La topología que se elija define qué tan tolerante a fallas es la red y cuánto cuesta cablearla.</p>"},
+      {title:"Medios guiados y no guiados", html:"<p>Guiados: par trenzado, cable coaxial y fibra óptica. No guiados: radio, microondas, satélite, infrarrojo. Cada uno tiene su propia atenuación típica (par trenzado ≈3 dB/km, coaxial ≈7 dB/km, fibra ≈0,2–0,5 dB/km) — esos números son justo los que después se usan en las fórmulas de atenuación de la Unidad 3.</p>"}
     ]
   },
   {
@@ -31,8 +31,8 @@ const UNITS = [
     short: "dB, dBm, SNR, ruido térmico",
     intro: "Estudia cómo se degrada una señal en su paso por el canal: atenuación (dB, dBm, dBi), pérdida en espacio libre, ruido térmico y la relación señal a ruido (SNR). Estas magnitudes son el insumo directo de la Unidad 5 (capacidad del canal) y de la Unidad 8 (calidad de una modulación).",
     topics: [
-      {title:"Tipos de distorsión", html:"<p>A diferencia del ruido (que agrega energía ajena a la señal), la distorsión es un cambio en la <i>forma</i> de la propia señal, causado por el canal: <b>por atenuación</b> (la atenuación no es igual para todas las frecuencias — crece con f —, así que las componentes agudas de la señal llegan más débiles que las graves; se corrige con ecualizadores); <b>por retardo/fase</b> (cada componente de frecuencia viaja a distinta velocidad de propagación dentro del medio y llega desfasada respecto a las demás — es crítica en transmisión digital de alta velocidad, donde desalinea los bits); y <b>armónica</b> (la no linealidad de un amplificador o un componente activo genera armónicos — 2f, 3f, 5f... — que no estaban en la señal original, 'ensuciando' su espectro; ver Serie de Fourier en la Unidad 2 para entender por qué aparecen justo en esas frecuencias).</p>"},
-      {title:"Tipos de ruido", html:"<p>El <b>ruido térmico</b> (u3-f6/u3-f7, agitación de electrones por temperatura) no es el único: existe ruido <b>externo</b> — atmosférico, cósmico/solar, generado por el hombre (motores, líneas de alta tensión), impulsivo (picos breves y de gran amplitud) y diafonía/crosstalk (una señal de un par de cables se acopla a otro par adyacente) — y ruido <b>interno</b> adicional al térmico — de disparo o <i>shot noise</i> (fluctuaciones por la naturaleza discreta de la corriente eléctrica en semiconductores) y de partición (cuando la corriente se reparte entre varios caminos dentro de un dispositivo). La distorsión armónica y la intermodulación (mezcla de dos o más frecuencias que genera productos no deseados) se consideran, a diferencia de los anteriores, <b>ruido correlacionado</b> con la señal, porque dependen de ella y desaparecen si la señal desaparece.</p>"}
+      {title:"Tipos de distorsión", html:"<p>El ruido agrega algo que no estaba; la distorsión cambia la forma de lo que ya estaba. Hay tres tipos: <b>por atenuación</b> (no todas las frecuencias se atenúan igual, así que las más agudas llegan más débiles), <b>por retardo</b> (cada frecuencia viaja a distinta velocidad y llega desfasada, un problema serio en transmisión digital rápida) y <b>armónica</b> (un componente no lineal genera armónicos — 2f, 3f... — que no estaban en la señal original).</p>"},
+      {title:"Tipos de ruido", html:"<p>Además del ruido térmico (u3-f6/u3-f7) hay varios más. Externo: atmosférico, generado por motores o líneas de alta tensión, impulsivo (picos cortos), y diafonía (una señal se acopla a un cable vecino). Interno: ruido de disparo (shot noise) y de partición, por cómo se mueve la corriente en los semiconductores. La distorsión armónica y la intermodulación son distintas: dependen de la señal y desaparecen si la señal desaparece.</p>"}
     ],
     formulas: ["u3-f1","u3-f2","u3-f3","u3-f4","u3-f5","u3-f6","u3-f7","u3-f8","u3-f9"]
   },
@@ -53,7 +53,7 @@ const UNITS = [
     short: "BER, paridad, CRC, Hamming",
     intro: "Toda la Unidad 3 (ruido) tiene una consecuencia práctica: bits que llegan mal. Acá se ve cómo medirlo (BER), cómo detectarlo (paridad VRC/LRC, CRC) y cómo corregirlo (distancia de Hamming, código de Hamming, FEC).",
     topics: [
-      {title:"ARQ: corrección pidiendo retransmisión", html:"<p>Frente a FEC (Forward Error Correction — Hamming, u6-f3/u6-f6 — que corrige sin pedir nada de vuelta), existe el enfoque opuesto: <b>ARQ</b> (Automatic Repeat reQuest), que detecta el error (con paridad o CRC) y pide retransmitir la trama dañada. Tres variantes: <b>Parada-y-espera</b> (Stop-and-Wait) — el emisor manda una trama y espera su ACK/NACK antes de mandar la siguiente; simple pero deja el canal ocioso mientras espera. <b>Vuelta-atrás-N</b> (Go-Back-N) — el emisor manda varias tramas seguidas (ventana deslizante) sin esperar cada ACK; si una llega dañada, se descartan y retransmiten <i>todas</i> las tramas desde esa en adelante, aunque hayan llegado bien. <b>Repetición selectiva</b> (Selective Repeat) — igual que Go-Back-N pero solo retransmite la trama puntual que falló (vía NAK), más eficiente pero exige más memoria en el receptor para reordenar. La elección es un compromiso clásico entre simplicidad, uso del canal y complejidad del receptor.</p>"}
+      {title:"ARQ: corrección pidiendo retransmisión", html:"<p>Hamming corrige sin pedir nada de vuelta (FEC). ARQ hace lo opuesto: detecta el error y pide retransmitir. Hay tres variantes. <b>Parada-y-espera</b>: mandás una trama, esperás el ACK, recién ahí mandás la siguiente — simple, pero deja el canal parado mientras espera.</p><p><b>Go-Back-N</b>: mandás varias tramas seguidas sin esperar cada ACK; si una llega mal, se retransmiten todas desde ahí, aunque algunas hayan llegado bien. <b>Repetición selectiva</b> hace lo mismo pero retransmite solo la trama que falló — más eficiente, pero el receptor necesita más memoria para reordenar.</p>"}
     ],
     formulas: ["u6-f1","u6-f2","u6-f3","u6-f4","u6-f5","u6-f6","u6-f7"]
   },
@@ -62,7 +62,7 @@ const UNITS = [
     short: "Bits, baudios, ancho de banda",
     intro: "Formaliza la relación entre bits, símbolos (baudios) y ancho de banda necesario para transmitirlos. Es la 'caja de herramientas' que después se usa tal cual en la Unidad 8 (modulación) y en la Unidad 9 (módems).",
     topics: [
-      {title:"Transmisión síncrona, asíncrona e isócrona", html:"<p>La <b>asíncrona</b> envía bit a bit, cada carácter enmarcado por un bit de inicio (start) y uno o más de parada (stop), con huecos irregulares entre caracteres: es simple de implementar (no requiere reloj compartido) pero ineficiente, porque los bits de start/stop son pura sobrecarga. La <b>síncrona</b> agrupa los datos en tramas más grandes transmitidas con un reloj compartido entre emisor y receptor (sincronizado, justamente, gracias a códigos de línea autosincronizantes como Manchester — ver u7-f4), lo que la hace mucho más eficiente para grandes volúmenes de datos. La <b>isócrona</b> agrega a lo síncrono la garantía de una latencia constante entre símbolos, imprescindible para tráfico de tiempo real como voz o video, donde una demora variable (jitter) es peor que una pérdida ocasional.</p>"}
+      {title:"Síncrona, asíncrona e isócrona", html:"<p>La <b>asíncrona</b> manda bit a bit, con un bit de inicio y uno de parada por carácter: simple, pero esos bits extra son pura sobrecarga. La <b>síncrona</b> agrupa los datos en tramas grandes con un reloj compartido entre emisor y receptor, mucho más eficiente. La <b>isócrona</b> suma a eso una latencia constante entre símbolos — necesaria para voz o video, donde una demora variable molesta más que perder algún dato.</p>"}
     ],
     formulas: ["u7-f1","u7-f2","u7-f3","u7-f4"]
   },
@@ -71,8 +71,8 @@ const UNITS = [
     short: "ASK/FSK/PSK/QAM, PCM",
     intro: "Aplica todo lo anterior: ancho de banda (U2/U7), capacidad y SNR (U3/U5) y tasa de bits/baudios (U7) a las técnicas concretas de modulación digital (ASK, FSK, PSK, QAM), a la modulación de pulsos (PAM/PCM) y a la multicanalización (FDM/TDM).",
     topics: [
-      {title:"PAM, PWM y PPM: modulación de pulsos analógica", html:"<p>Antes de llegar a PCM (que ya es digital), existen tres formas de modular una señal analógica usando pulsos, sin cuantificar ni codificar nada: <b>PAM</b> (Pulse Amplitude Modulation) — la amplitud de cada pulso sigue el valor de la señal muestreada; es, de hecho, el primer paso de PCM antes de cuantificar. <b>PWM</b> (Pulse Width Modulation) — la amplitud de los pulsos es constante, pero su ancho (duración) varía según la señal; se usa muchísimo en electrónica de potencia (control de motores, dimmers) porque es fácil de generar y filtrar. <b>PPM</b> (Pulse Position Modulation) — los pulsos tienen amplitud y ancho constantes, pero su posición en el tiempo (el instante en que aparecen dentro de cada intervalo) varía según la señal; es la más inmune al ruido de amplitud de las tres (un pulso ruidoso sigue estando 'en su lugar'), pero también la más compleja de detectar correctamente.</p>"},
-      {title:"FDM y TDM: cómo comparte el canal más de una señal", html:"<p><b>FDM</b> (Frequency Division Multiplexing) traslada cada señal a una banda de frecuencias distinta dentro del mismo medio físico (usando modulación, Unidad 8), separadas por bandas de guarda para que no se superpongan — es analógico por naturaleza y es la técnica detrás de la radio FM con múltiples emisoras o del cable coaxial de TV. Ejemplo típico: 5 canales de 100kHz con guardas de 10kHz ocupan en total 5×100+4×10=540kHz de ancho de banda. <b>TDM</b> (Time Division Multiplexing) en cambio usa toda la banda pero reparte el tiempo: cada señal transmite por turnos, en una ranura (slot) de tiempo fija dentro de una trama que se repite — es la técnica digital por excelencia (la trama E1 de telefonía, por ejemplo, tiene 32 ranuras de 8 bits cada una, 30 de voz y 2 de señalización, repitiéndose 8000 veces por segundo). Existe además <b>TDM estadística o asíncrona</b>, que no reserva una ranura fija por canal sino que la asigna dinámicamente solo a quien tiene datos para enviar en ese instante, aprovechando mejor el canal cuando no todas las fuentes transmiten todo el tiempo (la base conceptual de ATM y, más adelante, de los paquetes).</p>"}
+      {title:"PAM, PWM y PPM: pulsos analógicos", html:"<p>Antes de llegar a PCM (ya digital) hay tres formas de modular con pulsos sin cuantificar nada. <b>PAM</b>: la amplitud de cada pulso sigue la señal — es, de hecho, el primer paso de PCM. <b>PWM</b>: la amplitud es constante pero varía el ancho del pulso; se usa mucho en electrónica de potencia. <b>PPM</b>: amplitud y ancho constantes, varía la posición del pulso en el tiempo — la más inmune al ruido, pero también la más difícil de detectar.</p>"},
+      {title:"FDM y TDM: compartir el canal", html:"<p><b>FDM</b> le da a cada señal una banda de frecuencia distinta, separadas por bandas de guarda — es la técnica detrás de la radio FM con varias emisoras. <b>TDM</b> en cambio reparte el tiempo: cada señal transmite por turnos en una ranura fija dentro de una trama que se repite (así funciona la trama E1 de telefonía). También existe la <b>TDM estadística</b>, que asigna ranuras solo a quien tiene datos para mandar en ese momento — la base de ATM y, después, de los paquetes.</p>"}
     ],
     formulas: ["u8-f1","u8-f2","u8-f3","u8-f4","u8-f5","u8-f6","u8-f7"]
   },
@@ -81,9 +81,9 @@ const UNITS = [
     short: "Módems, xDSL, DMT",
     intro: "Baja todo a los equipos reales: el módem como ETCD, sus velocidades M-arias (misma fórmula de la Unidad 7) y la técnica DMT usada en xDSL para calcular la velocidad máxima teórica de un ADSL.",
     topics: [
-      {title:"Estándares de módem (Serie V, ITU-T)", html:"<p>Cada estándar de módem fija qué modulación usa y a qué tasa de símbolos, lo que determina su velocidad máxima — la misma relación R=r×n de la Unidad 7 (u7-f2), aplicada a cada estándar concreto:</p><table class='map-table' style='margin-top:10px;'><tr><th>Estándar</th><th>Modulación</th><th>Semidúplex</th><th>Dúplex</th></tr><tr><td class='concept'>V.22bis</td><td>4-QAM</td><td>2400 bps</td><td>1200 bps</td></tr><tr><td class='concept'>V.26</td><td>4-PSK</td><td>2400 bps</td><td>1200 bps</td></tr><tr><td class='concept'>V.27</td><td>8-PSK</td><td>4800 bps</td><td>2400 bps</td></tr><tr><td class='concept'>V.29</td><td>16-QAM</td><td>9600 bps</td><td>4800 bps</td></tr><tr><td class='concept'>V.32</td><td>32-QAM</td><td>—</td><td>9600 bps</td></tr><tr><td class='concept'>V.32bis</td><td>64-QAM</td><td>—</td><td>14400 bps</td></tr><tr><td class='concept'>V.34</td><td>960-QAM</td><td>—</td><td>33600 bps</td></tr></table><p style='margin-top:10px;'>Nota cómo, salvo cuando el modo es dúplex (ancho de banda compartido entre ambos sentidos, ver Unidad 1), la tasa semidúplex siempre duplica a la dúplex: es la misma señal, pero en dúplex el canal se reparte entre ambos sentidos simultáneos.</p>"},
-      {title:"Estructura de canales de un ADSL clásico (FDM)", html:"<p>El ADSL reparte la línea telefónica de cobre en bandas de frecuencia (FDM, Unidad 8) entre tres usos: <b>voz</b> (0-4 kHz, el teléfono de siempre), una <b>banda de guarda</b> (canales 1 a 5, evita que el teléfono interfiera con los datos), <b>upstream</b> (canales 6 a 30 — 24 subcanales de datos, hasta 1,44 Mbps teóricos según u9-f2/u9-f3) y <b>downstream</b> (canales 31 a 255 — 224 subcanales, hasta 13,44 Mbps teóricos). En la práctica, por el bit-loading real (u9-f3) y la distancia a la central, un ADSL clásico suele dar unos 8 Mbps de bajada y 1 Mbps de subida.</p>"},
-      {title:"Familia xDSL: velocidad vs. distancia", html:"<p>Todas las variantes xDSL son el mismo principio (DMT sobre el par de cobre existente) con distinto reparto de banda y agresividad: <b>ADSL</b> hasta 8 Mbps bajada / 1 Mbps subida; <b>ADSL2+</b> hasta 24/2 Mbps; <b>VDSL2</b> hasta 100/50 Mbps (pero solo a muy corta distancia de la central, su alcance cae rápido con los km de cable); <b>HDSL</b>, simétrico, 1,5-2 Mbps en ambos sentidos, pensado para enlaces dedicados más que para internet residencial. El patrón común a toda la familia: a más velocidad prometida, menor alcance sobre el mismo cable de cobre — la atenuación del par trenzado (Unidad 1/3) crece con la frecuencia, y más Mbps exige usar frecuencias más altas.</p>"}
+      {title:"Estándares de módem (Serie V, ITU-T)", html:"<p>Cada estándar fija la modulación y la tasa de símbolos, y de ahí sale la velocidad máxima (R=r×n, Unidad 7):</p><table class='map-table' style='margin-top:10px;'><tr><th>Estándar</th><th>Modulación</th><th>Semidúplex</th><th>Dúplex</th></tr><tr><td class='concept'>V.22bis</td><td>4-QAM</td><td>2400 bps</td><td>1200 bps</td></tr><tr><td class='concept'>V.26</td><td>4-PSK</td><td>2400 bps</td><td>1200 bps</td></tr><tr><td class='concept'>V.27</td><td>8-PSK</td><td>4800 bps</td><td>2400 bps</td></tr><tr><td class='concept'>V.29</td><td>16-QAM</td><td>9600 bps</td><td>4800 bps</td></tr><tr><td class='concept'>V.32</td><td>32-QAM</td><td>—</td><td>9600 bps</td></tr><tr><td class='concept'>V.32bis</td><td>64-QAM</td><td>—</td><td>14400 bps</td></tr><tr><td class='concept'>V.34</td><td>960-QAM</td><td>—</td><td>33600 bps</td></tr></table><p style='margin-top:10px;'>La tasa semidúplex siempre duplica a la dúplex, porque en dúplex el canal se reparte entre los dos sentidos al mismo tiempo.</p>"},
+      {title:"Canales de un ADSL clásico", html:"<p>El ADSL reparte la línea de cobre en tres usos: <b>voz</b> (0-4 kHz), una <b>banda de guarda</b> y, con FDM, <b>upstream</b> (24 subcanales, hasta 1,44 Mbps teóricos) y <b>downstream</b> (224 subcanales, hasta 13,44 Mbps teóricos). En la práctica, por la distancia a la central, un ADSL clásico suele dar unos 8 Mbps de bajada y 1 Mbps de subida.</p>"},
+      {title:"Familia xDSL: velocidad vs. distancia", html:"<p>Todas las variantes son el mismo principio (DMT sobre cobre) con distinto reparto de banda: ADSL llega a 8/1 Mbps, ADSL2+ a 24/2, VDSL2 hasta 100/50 pero solo muy cerca de la central, y HDSL es simétrico (1,5-2 Mbps ambos lados), pensado para enlaces dedicados. El patrón se repite siempre: más velocidad promete, menos distancia aguanta, porque el cable de cobre atenúa más a mayor frecuencia.</p>"}
     ],
     formulas: ["u9-f1","u9-f2","u9-f3"]
   }
@@ -105,7 +105,7 @@ FORMULAS["u2-f1"] = {
     ["ω₀","frecuencia angular fundamental (rad/s)"],
     ["n","número de armónico (1,2,3…)"]
   ],
-  explain:`Fourier demostró que cualquier función periódica "de comportamiento razonable" (condiciones de Dirichlet) se puede reconstruir como una suma de senos y cosenos de frecuencias múltiplos de la fundamental (armónicos). Cada armónico agrega detalle: con pocos armónicos se obtiene una aproximación gruesa de la señal, y a medida que se suman más, la señal reconstruida se acerca a la original. Esta idea es la que permite después hablar del "espectro" de una señal y de su ancho de banda.`,
+  explain:`Fourier se dio cuenta de algo útil: cualquier señal periódica se puede armar sumando senos y cosenos de distintas frecuencias (armónicos). Con pocos armónicos la aproximación es gruesa; sumando más, se va pareciendo cada vez más a la señal real. De acá sale la idea de "espectro": en vez de pensar la señal en el tiempo, pensarla como una lista de frecuencias y qué tanto pesa cada una.`,
   example:`Para una onda cuadrada de período T, la serie resulta<br><code>f(t) = (4/π)[ sen(ω₀t) + (1/3)sen(3ω₀t) + (1/5)sen(5ω₀t) + (1/7)sen(7ω₀t) + … ]</code><br>— sólo aparecen armónicos impares. Probá el simulador: cada armónico que agregás acerca la curva a la onda cuadrada ideal.`,
   related:["u2-f2","u5-f2","u7-f3"],
   special:"fourier"
@@ -116,7 +116,7 @@ FORMULAS["u2-f2"] = {
   name:"Ancho de banda efectivo de una señal",
   latex:"B = \\Delta f = f_2-f_1 \\;\\;\\text{(rango de frecuencias que concentra la mayor parte de la energía)}",
   vars:[["B","ancho de banda efectivo (Hz)"],["f1, f2","frecuencias que delimitan el espectro útil"]],
-  explain:"Como una señal real está formada por infinitos armónicos que decrecen en amplitud, en la práctica se define el ancho de banda efectivo como el rango de frecuencias que concentra la mayor parte de la energía del espectro. A mayor ancho de banda, mayor es la capacidad de transportar información por ese canal — esta idea aparece de forma exacta en la fórmula de Nyquist y en la de Shannon (Unidad 5), y en el ancho de banda necesario de cada tipo de modulación (Unidad 8).",
+  explain:"Una señal real tiene infinitos armónicos, pero no todos pesan igual. El ancho de banda efectivo es, en la práctica, el rango de frecuencias donde se concentra casi toda la energía de la señal. Y es un dato clave: cuanto más ancho de banda tiene un canal, más información puede transportar (esto se formaliza en Nyquist y Shannon, Unidad 5).",
   example:"La voz humana ocupa entre 300 Hz y 3400 Hz aproximadamente: su ancho de banda efectivo (usado por la telefonía) es de unos 3100 Hz, aunque el oído humano perciba hasta 20 kHz.",
   related:["u7-f3","u5-f2","u5-f3","u8-f1"],
   calc:null
@@ -127,7 +127,7 @@ FORMULAS["u2-f3"] = {
   name:"Filtros: respuesta en frecuencia (RC pasa-bajo)",
   latex:"G_v(f) = \\dfrac{1}{\\sqrt{1+(2\\pi f R C)^2}} \\qquad f_c=\\dfrac{1}{2\\pi RC} \\qquad \\varphi(f) = -\\arctan(2\\pi f RC)",
   vars:[["R, C","resistencia y capacitancia del filtro RC"],["fc","frecuencia de corte: donde la ganancia cae a 0,707 (−3 dB)"],["Gv(f)","ganancia de tensión a la frecuencia f (adimensional, o en dB)"],["φ(f)","desfasaje que introduce el filtro a la frecuencia f"]],
-  explain:"Un filtro deja pasar unas frecuencias y atenúa otras — es la herramienta física detrás de 'ancho de banda del canal' (u2-f2) y de la ecualización que corrige la distorsión por atenuación (Unidad 3). Se clasifican por banda que dejan pasar: pasa-bajo, pasa-alto, pasa-banda y rechaza-banda (notch); y por si tienen ganancia propia: pasivo (solo R, L, C) o activo (con amplificador). El circuito RC pasa-bajo de un polo es el caso más simple: por encima de fc la ganancia cae a razón de 6 dB por octava (se duplica la atenuación cada vez que se duplica la frecuencia), y a la propia fc la señal ya perdió un 29% de su amplitud (−3 dB) y está desfasada 45°.",
+  explain:"Un filtro deja pasar ciertas frecuencias y frena otras — pasa-bajo, pasa-alto, pasa-banda o rechaza-banda, según qué deje pasar. El RC pasa-bajo es el caso más simple para entender la idea: por debajo de fc casi no atenúa nada, y por encima empieza a cortar cada vez más fuerte. Justo en fc ya perdió el 29% de la amplitud (−3 dB) y la señal sale desfasada 45°.",
   example:"Con R=1,6kΩ y C=100nF: fc=1/(2π·1600·10⁻⁷)≈995 Hz. A f=fc la ganancia es 0,707 (−3dB) y la fase −45°; a f=10·fc la ganancia ya cayó a ≈0,0995 (−20dB), diez veces más atenuada.",
   related:["u2-f2","u3-f1"],
   special:"filter"
@@ -141,7 +141,7 @@ FORMULAS["u3-f1"] = {
   name:"El decibel (dB): atenuación / ganancia",
   latex:"dB = 10\\,\\log_{10}\\!\\left(\\dfrac{P_2}{P_1}\\right)",
   vars:[["P1","potencia de entrada (W, mW…)"],["P2","potencia de salida (misma unidad que P1)"]],
-  explain:"El decibel mide la relación entre dos potencias. Es negativo cuando la señal se atenuó y positivo cuando se amplificó. Su gran ventaja práctica: como es logarítmico, las atenuaciones y ganancias de varios tramos en cascada se pueden sumar algebraicamente en vez de multiplicarse — por eso se usa en todos los presupuestos de enlace (ver dBm, dBi y RSSI más abajo).",
+  explain:"El decibel compara dos potencias: negativo si se perdió señal, positivo si se ganó. Lo que lo hace tan usado es que, al ser logarítmico, las pérdidas y ganancias de varios tramos se suman directamente en vez de multiplicarse. Por eso aparece en todos los presupuestos de enlace.",
   example:"Si la potencia se reduce a la mitad (P2 = 0,5·P1): dB = 10·log₁₀(0,5) = −3 dB. Perder 3 dB equivale siempre a perder la mitad de la potencia.",
   related:["u3-f2","u3-f3","u3-f8","u3-f9"],
   calc:{
@@ -165,7 +165,7 @@ FORMULAS["u3-f2"] = {
   name:"dBm — potencia referida a 1 mW",
   latex:"dBm = 10\\,\\log_{10}\\!\\left(\\dfrac{P[\\text{mW}]}{1\\text{ mW}}\\right)",
   vars:[["P","potencia absoluta en mW"]],
-  explain:"El dB expresa una relación entre dos potencias, pero no exige que ambas existan físicamente: si se fija arbitrariamente una de referencia (1 mW), el resultado es una medida absoluta de potencia expresada en dBm. Es la unidad estándar para especificar la potencia de transmisión (Ptx) y la sensibilidad de un receptor (Srx) en cualquier hoja de datos de radioenlaces o WiFi.",
+  explain:"Mismo dB de antes, pero fijando la referencia en 1 mW — así deja de ser una relación y pasa a ser una medida de potencia absoluta. Es la unidad que vas a ver siempre en las hojas de datos de equipos WiFi: potencia de transmisión, sensibilidad del receptor, todo en dBm.",
   example:"Una potencia de transmisión típica de un router WiFi es de 20 dBm = 100 mW. Una sensibilidad típica de recepción es de −82 dBm (un número extremadamente pequeño en mW).",
   related:["u3-f1","u3-f5"],
   calc:{
@@ -182,7 +182,7 @@ FORMULAS["u3-f3"] = {
   name:"dBi — ganancia de antena",
   latex:"dBi = 10\\,\\log_{10}\\!\\left(\\dfrac{P_{antena}}{P_{isotropica}}\\right)",
   vars:[["dBi","ganancia de la antena respecto de una antena isotrópica ideal"]],
-  explain:"Compara la potencia irradiada por una antena real, en su dirección de máxima ganancia, contra la de una antena isotrópica ideal (que irradia igual en todas direcciones). Cuanta más ganancia en dBi, más concentra la antena la energía en una dirección — parámetro clave del presupuesto de enlace (RSSI) de una red WiFi o de radioenlace.",
+  explain:"Compara una antena real contra una ideal que irradia igual para todos lados (isotrópica). Más dBi significa que la antena concentra más la energía en una dirección en vez de repartirla — un dato clave a la hora de calcular el presupuesto de enlace de un radioenlace.",
   example:"Una antena que dobla la potencia respecto de la isotrópica: dBi = 10·log₁₀(2) = 3 dBi. Si la triplica: 10·log₁₀(3) ≈ 4,8 dBi.",
   related:["u3-f1","u3-f5"],
   calc:{
@@ -199,7 +199,7 @@ FORMULAS["u3-f4"] = {
   name:"Pérdida en el espacio libre (L₀)",
   latex:"L_0[dB] = 32{,}45 + 20\\log_{10} f[\\text{MHz}] + 20\\log_{10} d[\\text{Km}] \\;=\\; 92{,}44 + 20\\log_{10} f[\\text{GHz}] + 20\\log_{10} d[\\text{Km}]",
   vars:[["L0","pérdida por espacio libre (dB)"],["f","frecuencia de la portadora"],["d","distancia entre antenas (Km)"]],
-  explain:"A medida que una onda de radio se aleja del transmisor, su potencia se reparte sobre un frente de onda cada vez mayor y la densidad de potencia disminuye. Esta pérdida crece con la frecuencia y con la distancia, y es el término dominante en el presupuesto de enlace (RSSI) de cualquier enlace WiFi o radioenlace punto a punto.",
+  explain:"Una onda de radio se va debilitando sola a medida que se aleja, porque la misma potencia se reparte en un frente cada vez más grande. Esa pérdida crece con la frecuencia y con la distancia, y suele ser el término que más pesa en cualquier presupuesto de enlace.",
   example:"f = 5,8 GHz, d = 100 m (0,1 Km): L₀ = 92,44 + 20·log₁₀(5,8) + 20·log₁₀(0,1) ≈ 87,71 dB — el valor usado en el ejemplo de presupuesto de enlace de la cátedra.",
   related:["u3-f5"],
   calc:{
@@ -223,7 +223,7 @@ FORMULAS["u3-f5"] = {
   name:"Presupuesto de enlace (RSSI)",
   latex:"P_{RX} = P_{TX} - L_{cable,TX} + G_{ant,TX} - L_{espacio\\ libre} + G_{ant,RX} - L_{cable,RX}",
   vars:[["Ptx","potencia de transmisión (dBm)"],["Lcable","pérdida de cada tramo de cable/conectores (dB)"],["Gant","ganancia de cada antena (dBi)"],["Lfsl","pérdida en espacio libre (dB), ver fórmula anterior"],["Prx = RSSI","potencia recibida (dBm)"]],
-  explain:"Es la suma en dB (por eso todo se puede sumar y restar directamente) de todas las ganancias y pérdidas entre el transmisor y el receptor. El resultado, el RSSI, se compara contra la sensibilidad del receptor (Srx): si RSSI > Srx el enlace es viable; si no, hay que subir potencia, ganancia de antena o acortar distancia.",
+  explain:"Acá se junta todo lo anterior: sumás y restás, en dB, todas las ganancias y pérdidas entre el transmisor y el receptor. El resultado es el RSSI, y se compara contra la sensibilidad del receptor: si RSSI es mayor, el enlace funciona.",
   example:"Ptx=20 dBm, Lcable=1 dB (cada extremo), Gant=3 dBi y 1 dBi, Lfsl=87,71 dB → RSSI = 20−1+3−87,71+1−1 = −65,71 dBm. Con Srx=−82 dBm, el enlace funciona con 16,29 dB de margen.",
   related:["u3-f1","u3-f2","u3-f3","u3-f4"],
   calc:{
@@ -254,7 +254,7 @@ FORMULAS["u3-f6"] = {
   name:"Densidad de potencia de ruido térmico (N₀)",
   latex:"N_0 = kT \\;\\;\\left[\\dfrac{W}{Hz}\\right]",
   vars:[["N0","densidad de potencia de ruido (W/Hz)"],["k","constante de Boltzmann = 1,38×10⁻²³ J/K"],["T","temperatura absoluta (Kelvin)"]],
-  explain:"El ruido térmico se origina en el movimiento aleatorio de los electrones por agitación térmica. Es aleatorio, blanco (está presente en todas las frecuencias por igual) y resistivo. La densidad de potencia que aporta por cada Hz de ancho de banda depende únicamente de la temperatura — es la base para calcular la potencia total de ruido (N) y, con ella, la relación señal/ruido de la Unidad 5.",
+  explain:"Los electrones se mueven solos por efecto de la temperatura, y eso genera ruido — está en todas partes, en todas las frecuencias por igual. Esta fórmula dice cuánta potencia de ruido aporta por cada Hz, y depende nada más que de la temperatura. Es el punto de partida para calcular la potencia total de ruido (siguiente fórmula).",
   example:"A T = 17°C = 290 K: N₀ = 1,38×10⁻²³ × 290 ≈ 4,00×10⁻²¹ W/Hz.",
   related:["u3-f7","u5-f3","u5-f6"],
   calc:{
@@ -275,7 +275,7 @@ FORMULAS["u3-f7"] = {
   name:"Potencia de ruido térmico (N)",
   latex:"N = N_0\\,B = kTB \\;\\;[W]",
   vars:[["N","potencia total de ruido en el ancho de banda B (W)"],["N0","densidad de potencia de ruido (W/Hz)"],["B","ancho de banda del sistema (Hz)"]],
-  explain:"La potencia total de ruido dentro de una banda de trabajo es simplemente la densidad de potencia por el ancho de banda considerado. Cuanto mayor es el ancho de banda de un receptor, mayor es la potencia de ruido que 'deja pasar' — esta N es exactamente la que aparece en el denominador de la relación señal/ruido S/N.",
+  explain:"Simplemente multiplicás la densidad de ruido (N0) por el ancho de banda que estás usando. Cuanto más ancho de banda, más ruido entra — esta N es la que después aparece abajo en la relación señal/ruido.",
   example:"T=17°C, B=1 MHz: N = 4,00×10⁻²¹ × 10⁶ = 4,00×10⁻¹⁵ W, equivalente a NdBm = 10·log₁₀(N/1mW) ≈ −114 dBm.",
   related:["u3-f6","u3-f8","u5-f3"],
   calc:{
@@ -300,7 +300,7 @@ FORMULAS["u3-f8"] = {
   name:"Relación Señal a Ruido — SNR(dB)",
   latex:"SNR = \\dfrac{P_S}{P_N}\\ \\text{(veces)} \\qquad SNR[dB] = 10\\,\\log_{10}\\!\\left(\\dfrac{S}{N}\\right)",
   vars:[["S","potencia de la señal útil (W)"],["N","potencia de ruido (W), ver fórmula anterior"]],
-  explain:"Mide qué tan por encima de la 'niebla' de ruido está la señal útil. Es, junto con el ancho de banda, uno de los dos únicos parámetros que determinan la capacidad máxima de un canal ruidoso (Teorema de Shannon, Unidad 5) y la calidad posible de una modulación digital como QAM (Unidad 8).",
+  explain:"Mide qué tan arriba del ruido está la señal útil. Junto con el ancho de banda, es lo único que hace falta para saber la capacidad máxima de un canal (Shannon, Unidad 5) y qué tan exigente puede ser una modulación como QAM.",
   example:"SNR = 24 dB equivale a una relación lineal SNR = 10^(24/10) ≈ 251 veces.",
   related:["u3-f7","u3-f9","u5-f3","u5-f4","u5-f5","u8-f4"],
   calc:{
@@ -331,7 +331,7 @@ FORMULAS["u3-f9"] = {
   name:"Factor de Ruido (F) e Índice de Ruido (NF)",
   latex:"F = \\dfrac{S/R_i}{S/R_o} \\qquad NF[dB] = 10\\log_{10}(F)",
   vars:[["S/Ri","SNR a la entrada del dispositivo/canal"],["S/Ro","SNR a la salida"],["F","factor de ruido (adimensional, no logarítmico)"]],
-  explain:"Caracteriza cuánto empeora la relación señal/ruido un dispositivo (amplificador, canal, etc.) al atravesarlo. En un circuito ideal S/Ri = S/Ro y F=1 (0 dB). En cualquier circuito real, el ruido interno agregado hace que la SNR de salida sea siempre peor que la de entrada, así que F > 1 siempre.",
+  explain:"Mide cuánto empeora la SNR al pasar por un dispositivo. En uno ideal no cambia nada (F=1), pero en la realidad todo circuito agrega su propio ruido interno, así que la SNR de salida siempre es peor que la de entrada y F siempre da mayor a 1.",
   example:"Si la SNR de entrada es 100 y la de salida cae a 40, F = 100/40 = 2,5 → NF = 10·log₁₀(2,5) ≈ 3,98 dB.",
   related:["u3-f8","u3-f1"],
   calc:{
@@ -358,7 +358,7 @@ FORMULAS["u4-f1"] = {
   name:"Cantidad de información I(x)",
   latex:"I(x) = \\log_2\\!\\left(\\dfrac{1}{P(x)}\\right) = -\\log_2 P(x) \\quad [\\text{bits}]",
   vars:[["P(x)","probabilidad de ocurrencia del símbolo/mensaje x"],["I(x)","cantidad de información que aporta x (bits)"]],
-  explain:"Cuanto menos probable es un mensaje, más información aporta el hecho de que ocurra (más 'sorpresa' genera). Un mensaje con probabilidad 1 (seguro) no aporta ninguna información. Esta es la unidad básica sobre la que se construye la entropía.",
+  explain:"La idea es simple: cuanto menos probable es algo, más sorpresa da que pase, y más información aporta. Algo que siempre va a pasar (P=1) no te dice nada nuevo. Esta cantidad es el ladrillo con el que se arma la entropía.",
   example:"Un símbolo con P(x)=0,01 aporta I(x) = log₂(1/0,01) = log₂(100) ≈ 6,64 bits, mientras que uno con P(x)=0,5 aporta sólo 1 bit.",
   related:["u4-f2"],
   calc:{
@@ -375,7 +375,7 @@ FORMULAS["u4-f2"] = {
   name:"Entropía de una fuente H(x)",
   latex:"H(x) = \\sum_{i=1}^{N} P(x_i)\\log_2\\!\\left(\\dfrac{1}{P(x_i)}\\right) \\quad [\\text{bits/símbolo}] \\qquad 0\\le H \\le \\log_2 N",
   vars:[["N","cantidad de símbolos distintos de la fuente"],["P(xi)","probabilidad de cada símbolo"],["H(x)","información promedio por símbolo (bits/símbolo)"]],
-  explain:"La entropía es el contenido promedio de información de una fuente: el promedio ponderado de I(xi) de todos sus símbolos. Es máxima (log₂N) cuando todos los símbolos son equiprobables (máxima incertidumbre) y disminuye cuando algunos símbolos son mucho más probables que otros (más previsible, menos información). Marca el límite teórico de compresión de esa fuente (ver Unidad 5, cota de Shannon).",
+  explain:"Es el promedio de información que aporta una fuente, símbolo por símbolo. Es máxima cuando todos los símbolos son igual de probables (no podés anticipar nada) y baja cuando algunos son mucho más frecuentes que otros. Este número marca el límite teórico de cuánto se puede comprimir esa fuente.",
   example:"Fuente con P(A)=0,5; P(B)=0,25; P(C)=0,125; P(D)=0,125 → H = 0,5·1 + 0,25·2 + 0,125·3 + 0,125·3 = 1,75 bits/símbolo.",
   related:["u4-f1","u4-f3","u4-f4","u5-f0"],
   special:"entropy"
@@ -386,7 +386,7 @@ FORMULAS["u4-f3"] = {
   name:"Redundancia de una fuente",
   latex:"R_d = \\dfrac{H_{MAX}-H}{H_{MAX}}\\times 100 \\;\\;[\\%]",
   vars:[["Hmax","entropía máxima posible = log₂N (fuente equiprobable)"],["H","entropía real de la fuente"],["Rd","redundancia porcentual"]],
-  explain:"Mide qué porcentaje de los símbolos emitidos por la fuente son, en promedio, 'previsibles' o innecesarios para transmitir la información esencial. Redundancia y entropía son opuestos: a mayor redundancia (símbolos muy probables, previsibles), menor entropía. Un texto en inglés, por ejemplo, tiene alrededor de 50% de redundancia.",
+  explain:"Mide qué tan previsible es una fuente comparada con el caso más parejo posible. A mayor redundancia, menor entropía: hay símbolos tan probables que casi no aportan información nueva. El inglés escrito, por ejemplo, anda por el 50% de redundancia.",
   example:"Fuente binaria con P(0)=1/4, P(1)=3/4: H = 0,25·log₂4 + 0,75·log₂(4/3) ≈ 0,811 bits/símbolo. Como Hmax=log₂2=1, la redundancia es Rd=(1−0,811)/1×100 ≈ 18,9%.",
   related:["u4-f2"],
   calc:{
@@ -413,7 +413,7 @@ FORMULAS["u4-f4"] = {
   name:"Eficiencia de un codificador de fuente",
   latex:"\\bar L(C) = \\sum_i P(x_i)\\,l_i \\qquad \\eta = \\dfrac{H(x)}{\\bar L(C)}\\times 100\\;[\\%]",
   vars:[["L̄(C)","longitud media del código (dígitos/símbolo)"],["li","longitud (en bits) asignada al símbolo i"],["η","eficiencia del código respecto del límite teórico H(x)"]],
-  explain:"El algoritmo de Huffman construye, a partir de las probabilidades de cada símbolo, un código de longitud variable que minimiza L̄(C): a los símbolos más probables les asigna palabras más cortas. El teorema de codificación de la fuente de Shannon garantiza que nunca se puede bajar de L̄(C) = H(x); la eficiencia mide qué tan cerca de ese límite teórico llega el código construido. Ojo: no alcanza con que un código tenga longitud variable para ser bueno — el <i>orden</i> de asignación importa. Si por error se le asigna el código más corto al símbolo menos probable (en vez de al más probable), L̄(C) empeora notablemente aunque se usen las mismas longitudes disponibles; Huffman, al construirse de abajo hacia arriba fusionando siempre las dos probabilidades menores, garantiza automáticamente el orden correcto. Ver el árbol paso a paso en u4-f6.",
+  explain:"Huffman arma un código de longitud variable: a los símbolos más probables les da palabras cortas, y a los raros, palabras largas. Nunca se puede bajar de H(x) (eso lo garantiza Shannon), así que la eficiencia mide qué tan cerca queda el código de ese límite. El orden de asignación importa — dárselo al símbolo equivocado empeora todo — pero Huffman lo resuelve solo. El armado paso a paso está en u4-f6.",
   example:"En el ejemplo de la cátedra (8 símbolos con probabilidades entre 0,01 y 0,40), Huffman logra L̄(C2) = 2,44 dígitos/símbolo frente a una entropía H(x) = 2,38 bits/símbolo: eficiencia η = 2,38/2,44 ≈ 97,5%.",
   related:["u4-f2","u4-f6","u5-f0"],
   calc:{
@@ -433,7 +433,7 @@ FORMULAS["u4-f5"] = {
   name:"Tasa de información R = H/σ̄",
   latex:"R = \\dfrac{H(x)}{\\bar\\sigma} \\;[\\text{bps}] \\qquad \\bar\\sigma=\\sum_j P_j\\,\\sigma_j",
   vars:[["H(x)","entropía de la fuente (bits/símbolo)"],["σ̄","duración media ponderada de un símbolo (s); si todos duran igual, σ̄=Ts"],["R","tasa de información real (bits/segundo)"]],
-  explain:"La entropía H(x) sola no dice nada sobre la velocidad real de una fuente: dos fuentes con la misma H(x) pueden exigirle cosas muy distintas al canal si una emite símbolos mucho más rápido que la otra. R convierte 'bits por símbolo' en 'bits por segundo' dividiendo por la duración media del símbolo. Cuando todos los símbolos duran lo mismo (Ts, como en la mayoría de los sistemas digitales), se simplifica a R=H(x)/Ts=r·H(x), con r la tasa de símbolos de la Unidad 5 (u5-f1) — esta es la conexión directa entre la Unidad 4 (cuánta información hay) y la Unidad 7 (a qué tasa se transmite).",
+  explain:"H(x) sola no dice nada sobre velocidad: dos fuentes con la misma entropía pueden exigirle cosas muy distintas al canal si una emite símbolos más rápido que la otra. R convierte bits por símbolo en bits por segundo, dividiendo por cuánto dura cada símbolo. Si todos duran igual, se simplifica a R=r·H(x), con r la tasa de símbolos.",
   example:"Fuente de 4 símbolos no equiprobables con H(x)=1,75 bits/símbolo, emitida a r=1000 símbolos/seg (todos de igual duración): R=1,75×1000=1750 bps. Si la fuente fuera equiprobable (H(x)=log₂4=2 bits/símbolo) a la misma tasa, R=2000 bps: el máximo posible para 4 símbolos.",
   related:["u4-f2","u5-f1","u7-f2"],
   calc:{
@@ -458,7 +458,7 @@ FORMULAS["u4-f6"] = {
     ["Paso 3","asignar 0/1 a cada rama de derecha a izquierda (o viceversa, cualquier convención consistente)"],
     ["Paso 4","leer el código de cada símbolo recorriendo el árbol desde la raíz hasta su hoja"]
   ],
-  explain:"Es el procedimiento concreto detrás de u4-f4: Huffman no asigna longitudes 'a ojo', las deriva de fusionar siempre las dos probabilidades más chicas en cada paso (por eso los símbolos poco probables terminan enterrados varios niveles, con códigos largos, y los símbolos frecuentes quedan cerca de la raíz, con códigos cortos). Ingresá tus propios símbolos y probabilidades abajo — tienen que sumar 1 — y mirá el árbol construirse fusión por fusión, con el código final de cada símbolo, L̄(C) y la eficiencia η calculados automáticamente.",
+  explain:"Así se arma el código de Huffman en la práctica: en cada paso se fusionan los dos símbolos menos probables, y se repite hasta que queda uno solo. Por eso los símbolos raros terminan con códigos largos (enterrados en el árbol) y los frecuentes con códigos cortos (cerca de la raíz). Cargá tus propios símbolos y probabilidades abajo (tienen que sumar 1) y mirá el árbol armarse solo.",
   example:"Con los 8 símbolos cargados por defecto abajo (probabilidades entre 0,04 y 0,40), el árbol fusiona primero los dos símbolos menos probables (G y H), después vuelve a fusionar el resultado con el siguiente más chico, y así hasta llegar a un único nodo con probabilidad 1 — los valores de H(x), L̄(C) y η se recalculan solos a medida que cambiás las probabilidades.",
   related:["u4-f2","u4-f4"],
   special:"huffman-tree"
@@ -472,7 +472,7 @@ FORMULAS["u5-f0"] = {
   name:"Teorema de codificación de la fuente (cota de Shannon)",
   latex:"\\bar L(C) \\ge H(x) \\quad [\\text{dígitos binarios/símbolo}]",
   vars:[["H(x)","entropía de la fuente, calculada en la Unidad 4"],["L̄(C)","longitud media del código usado para representarla"]],
-  explain:"Es el puente directo entre la Unidad 4 y la Unidad 5: ningún código puede representar una fuente, en promedio, con menos dígitos por símbolo que su entropía. Huffman (Unidad 4) es precisamente el intento de acercarse a esta cota lo más posible.",
+  explain:"Es el piso teórico: ningún código puede representar una fuente, en promedio, con menos bits por símbolo que su entropía. Huffman apunta justamente a acercarse lo más posible a este límite.",
   example:"Ver el ejemplo de eficiencia de Huffman en la Unidad 4: L̄(C2)=2,44 nunca puede bajar de H(x)=2,38.",
   related:["u4-f2","u4-f4"],
   calc:null
@@ -483,7 +483,7 @@ FORMULAS["u5-f1"] = {
   name:"Período de muestreo",
   latex:"T_s = \\dfrac{1}{f_s}",
   vars:[["fs","frecuencia de muestreo (Hz)"],["Ts","tiempo entre dos muestras consecutivas (s)"]],
-  explain:"Es la relación inversa básica entre la velocidad a la que se toman muestras de una señal y el tiempo que separa a cada muestra de la siguiente. Nyquist demostró que no hace falta transmitir toda una señal analógica continua: alcanza con muestrearla a una velocidad suficiente para poder reconstruirla del lado del receptor (frecuencia de Nyquist).",
+  explain:"Simplemente la inversa de la frecuencia de muestreo: si tomás más muestras por segundo, menos tiempo pasa entre una y otra. La idea de fondo es de Nyquist: no hace falta mandar la señal analógica completa, alcanza con muestrearla lo suficientemente rápido como para poder reconstruirla después.",
   example:"Si fs = 8000 Hz (telefonía digital), Ts = 1/8000 = 125 µs entre muestra y muestra.",
   related:["u5-f2","u8-f5","u8-f6"],
   calc:{
@@ -500,7 +500,7 @@ FORMULAS["u5-f2"] = {
   name:"Teorema de Nyquist — canal sin ruido",
   latex:"C = 2B\\log_2 M \\quad [\\text{bps}]",
   vars:[["C","capacidad máxima del canal (bps)"],["B","ancho de banda del canal (Hz)"],["M","número de niveles distintos de la señal"]],
-  explain:"Para un canal ideal (sin ruido) de ancho de banda finito B, Nyquist estableció el límite máximo de velocidad de transmisión. Si M=2 (señal binaria), log₂2=1 y la fórmula se reduce a C=2B. Aumentar los niveles de tensión distinguibles en la señal (M) permite incrementar la capacidad sin tocar el ancho de banda — la misma idea que después se usa en la modulación M-aria (Unidad 8) y en los módems (Unidad 9).",
+  explain:"Para un canal ideal, sin ruido, esta es la velocidad máxima posible. Con señal binaria (M=2) se reduce a C=2B. La parte interesante: si usás más niveles de tensión (M más grande), ganás capacidad sin necesitar más ancho de banda — la misma lógica que después aparece en modulación M-aria y en los módems.",
   example:"Canal de voz con B=3100 Hz y señal binaria (M=2): C=2·3100·log₂(2)=6200 bps. Con 4 niveles (M=4): C=2·3100·log₂(4)=12400 bps.",
   related:["u2-f2","u7-f1","u7-f2","u8-f2","u8-f3","u9-f1"],
   calc:{
@@ -521,7 +521,7 @@ FORMULAS["u5-f3"] = {
   name:"Teorema de Shannon — canal con ruido",
   latex:"C = B\\log_2\\!\\left(1+\\dfrac{S}{N}\\right) \\quad [\\text{bps}]",
   vars:[["C","capacidad máxima teórica del canal (bps)"],["B","ancho de banda del canal (Hz)"],["S/N","relación señal a ruido, en veces (no en dB)"]],
-  explain:"Shannon extendió a 1948 el trabajo de Nyquist para canales reales, sujetos a ruido aleatorio. Es el resultado más importante de toda la teoría de la comunicación: la capacidad de un canal está limitada únicamente por su ancho de banda B y por su relación señal/ruido — no importa qué esquema de modulación se use, jamás se puede superar este límite sin errores.",
+  explain:"Shannon agarró la idea de Nyquist y la llevó a canales reales, con ruido. Es probablemente el resultado más importante de toda la materia: la capacidad de un canal depende solo de su ancho de banda y de su SNR. No importa qué modulación uses, nunca se puede superar este límite sin errores.",
   example:"Canal de 1 MHz con SNR=24 dB (SNR≈255 veces): C = 10⁶·log₂(1+255) = 8 Mbps.",
   related:["u3-f8","u5-f2","u5-f4","u5-f5","u8-f4"],
   calc:{
@@ -549,7 +549,7 @@ FORMULAS["u5-f4"] = {
   name:"Eficiencia espectral",
   latex:"E_{max} = \\dfrac{C}{B} = \\log_2\\!\\left(1+\\dfrac{S}{N}\\right) \\quad [\\text{bps/Hz}]",
   vars:[["Emax","eficiencia espectral máxima (bps/Hz)"],["S/N","relación señal a ruido en veces"]],
-  explain:"Reordenando la fórmula de Shannon, la eficiencia espectral —cuántos bits por segundo se pueden transmitir por cada Hz de ancho de banda disponible— depende exclusivamente de la calidad del canal (su SNR), no de su ancho de banda absoluto. Es la métrica que se usa para comparar qué tan 'aprovechado' está un canal, independientemente de su tamaño.",
+  explain:"Reordenando Shannon: cuántos bits por segundo entran en cada Hz de ancho de banda depende solo de la SNR, no del tamaño del canal. Sirve para comparar qué tan bien aprovechado está un canal, sea chico o grande.",
   example:"Con SNR=255 veces (24 dB): Emax = log₂(256) = 8 bps/Hz — no importa si el canal es de 1 kHz o de 1 GHz.",
   related:["u5-f3"],
   calc:{
@@ -566,7 +566,7 @@ FORMULAS["u5-f5"] = {
   name:"Niveles M necesarios (Shannon–Hartley)",
   latex:"2B\\log_2 M = B\\log_2(1+SNR) \\;\\Rightarrow\\; M=\\sqrt{1+SNR}",
   vars:[["M","niveles de señal necesarios para alcanzar el límite de Shannon"],["SNR","relación señal/ruido en veces"]],
-  explain:"Compara la capacidad del canal según Nyquist (que depende de M) con la de Shannon (que depende del SNR) para el mismo canal, y despeja cuántos niveles M haría falta usar para efectivamente alcanzar la capacidad máxima que Shannon dice que es posible. Es exactamente la misma relación que se usa en la Unidad 8 para saber cuántos niveles de QAM soporta un canal dado su SNR.",
+  explain:"Igualando Nyquist (que depende de M) con Shannon (que depende del SNR), se puede despejar cuántos niveles M hacen falta para llegar justo a la capacidad máxima. Es la misma cuenta que en la Unidad 8 se usa para saber cuántos niveles de QAM soporta un canal.",
   example:"Canal de 1 MHz con SNR=255: M=√(1+255)=16 niveles — coincide con el ejemplo de la cátedra.",
   related:["u5-f2","u5-f3","u8-f3","u8-f4"],
   calc:{
@@ -583,7 +583,7 @@ FORMULAS["u5-f6"] = {
   name:"Relación Eb/N0",
   latex:"SNR = \\dfrac{E_b/N_0}{B/C}",
   vars:[["Eb","energía por bit"],["N0","densidad de potencia de ruido (Unidad 3)"],["B","ancho de banda (Hz)"],["C (o R)","capacidad o tasa de bit del canal (bps)"]],
-  explain:"En sistemas digitales se prefiere comparar esquemas de modulación usando Eb/N0 ('SNR por bit') en vez de la SNR global, porque es una magnitud normalizada que no depende del ancho de banda: permite comparar la calidad de un ASK contra un QAM aunque usen anchos de banda distintos, mirando únicamente su tasa de error de bit (BER, Unidad 6) para un mismo Eb/N0. De la misma igualdad sale una forma alternativa muy usada: Eb/N0 = SNR / η, donde η=C/B es la eficiencia espectral (u5-f4) — cuanto más bits por Hz se intenta transmitir, más Eb/N0 (más energía por bit) hace falta para sostener la misma probabilidad de error.",
+  explain:"Para comparar modulaciones se usa Eb/N0 ('SNR por bit') en vez del SNR global, porque no depende del ancho de banda: así se puede comparar ASK contra QAM aunque usen anchos distintos, mirando el BER para el mismo Eb/N0. También se puede escribir como Eb/N0 = SNR/η — cuantos más bits por Hz querés meter, más energía por bit necesitás para mantener la misma tasa de error.",
   example:"Si Eb/N0 = 10 dB, B = 1 MHz y C = 2 Mbps: SNR = (Eb/N0 en veces)·(C/B) = 10·2 = 20 veces ≈ 13 dB.",
   related:["u3-f7","u3-f8","u6-f1"],
   calc:{
@@ -610,7 +610,7 @@ FORMULAS["u5-f7"] = {
   name:"Capacidad de Shannon vs. ancho de banda y SNR",
   latex:"C = B\\log_2\\!\\left(1+\\dfrac{S}{N_0 B}\\right) \\;\\xrightarrow[B\\to\\infty]{}\\; \\dfrac{S}{N_0\\ln 2}",
   vars:[["S","potencia de señal, fija (W)"],["N0","densidad de potencia de ruido (W/Hz, Unidad 3)"],["B","ancho de banda (Hz) — el ruido total N=N0·B crece con B"],["C","capacidad del canal (bps)"]],
-  explain:"Agrandar el ancho de banda B no hace crecer la capacidad sin límite, aunque la fórmula de Shannon (u5-f3) lo sugiera a simple vista: si la potencia de señal S es fija, al agrandar B también entra más ruido térmico (N=N0·B, Unidad 3), así que la SNR=S/(N0B) cae. El resultado neto es que C crece con B pero cada vez más despacio, saturando en un techo (el 'límite de Shannon en potencia') igual a S/(N0·ln2) cuando B tiende a infinito. Es la razón por la que, en la práctica, agrandar el ancho de banda de un enlace tiene retornos decrecientes a partir de cierto punto, y por qué mejorar la SNR (más potencia, menos ruido) suele ser más rentable que seguir agrandando B.",
+  explain:"Agrandar B no hace crecer C sin límite, aunque la fórmula de Shannon lo sugiera a simple vista. El truco: si S es fija, más B también significa más ruido (N=N0·B), así que la SNR cae. El resultado es que C sigue subiendo, pero cada vez más despacio, hasta un techo (S/N0·ln2). Por eso, en la práctica, mejorar la SNR suele rendir más que seguir agrandando el ancho de banda.",
   example:"Con S=1W y N0=10⁻⁹ W/Hz: para B=1kHz, C≈19,93 kbps; para B=1MHz, C≈9,97 Mbps (mil veces más B, pero no mil veces más C); el techo S/(N0·ln2)≈1,44 Gbps no se alcanza nunca del todo. Movés el slider de B abajo y mirás cómo la curva se va achatando.",
   related:["u5-f2","u5-f3","u3-f6","u3-f7"],
   special:"shannon-capacity"
@@ -624,7 +624,7 @@ FORMULAS["u6-f1"] = {
   name:"Tasa de error de bit — BER",
   latex:"BER = \\dfrac{\\text{bits erróneos recibidos}}{\\text{total de bits recibidos}}",
   vars:[["BER","Bit Error Rate, adimensional (se expresa como potencia de 10)"]],
-  explain:"Es la medida directa y más básica de cuánto ruido (Unidad 3) terminó afectando a la transmisión digital. Redes telefónicas típicas rondan 10⁻⁶ BER; redes LAN con par trenzado, 10⁻⁸ a 10⁻⁹; fibra óptica hasta 10⁻¹¹. A partir de este valor se decide qué mecanismo de control de errores conviene aplicar (paridad, CRC, FEC).",
+  explain:"Es la forma más directa de medir cuánto ruido terminó afectando la transmisión. Una red telefónica típica anda en 10⁻⁶, un LAN de cobre en 10⁻⁸/10⁻⁹, fibra óptica hasta 10⁻¹¹. Según qué tan mal esté este número, se elige qué mecanismo de control de errores usar.",
   example:"Sobre 20.000 bits transmitidos, si se reciben 2 con error: BER = 2/20000 = 1×10⁻⁴.",
   related:["u5-f6","u6-f2"],
   calc:{
@@ -644,7 +644,7 @@ FORMULAS["u6-f2"] = {
   name:"Distancia de Hamming",
   latex:"\\text{Detectar } D \\text{ errores} \\Rightarrow H\\ge D+1 \\qquad \\text{Corregir } C \\text{ errores} \\Rightarrow H\\ge 2C+1",
   vars:[["H","distancia de Hamming mínima entre palabras de código válidas"],["D","cantidad de errores de bit que se pueden detectar"],["C","cantidad de errores de bit que se pueden corregir"]],
-  explain:"La distancia de Hamming es el número de bits que hay que cambiar para transformar una palabra de código válida en otra palabra válida distinta. Cuanto mayor sea esa distancia mínima, más errores hacen falta para 'confundir' un código válido con otro — de ahí se derivan directamente cuántos errores puede detectar o corregir un código dado.",
+  explain:"Es cuántos bits hay que cambiar para pasar de una palabra válida a otra. Cuanto más grande esa distancia mínima, más difícil confundir un código con otro — y de ahí sale directamente cuántos errores puede detectar o corregir el código.",
   example:"Con H=3 se pueden detectar D=2 errores, o corregir C=1 error, pero no ambas cosas al mismo tiempo con la misma capacidad (H−1 = D + C).",
   related:["u6-f3"],
   special:"hamming-distance"
@@ -655,7 +655,7 @@ FORMULAS["u6-f3"] = {
   name:"Bits de paridad necesarios (Código de Hamming)",
   latex:"2^{p}\\ge n+p+1",
   vars:[["n","cantidad de bits de datos a proteger"],["p","cantidad de bits de paridad (redundancia) a agregar"]],
-  explain:"El código de Hamming agrega p bits de paridad, ubicados en las posiciones potencia de 2 (1, 2, 4, 8…), de forma que su combinación permita no sólo detectar sino localizar y corregir un bit erróneo. La cantidad mínima de bits de paridad necesarios depende de cuántos bits de datos n se quieran proteger, según esta desigualdad. Ver el armado completo (posiciones, cálculo de cada paridad y localización del error) en u6-f6. Hamming corrige un único bit erróneo por palabra; para necesidades más exigentes existen otras familias de FEC: Reed-Solomon (pensado para errores en ráfaga, muy usado en CD/DVD y códigos QR), LDPC (códigos de paridad de baja densidad, para bloques grandes en canales muy ruidosos — WiFi, 5G) y los códigos convolucionales (procesan un flujo continuo de bits en vez de bloques, usados en telefonía satelital).",
+  explain:"Hamming agrega p bits de paridad en las posiciones potencia de 2 (1, 2, 4, 8...), de forma que alcanza para no solo detectar sino también ubicar y corregir un bit erróneo. Esta desigualdad dice cuántos bits de paridad mínimos hacen falta según cuántos bits de datos quieras proteger. El armado completo está en u6-f6. Para más de un bit erróneo por palabra existen otras familias de FEC, como Reed-Solomon o LDPC.",
   example:"Para n=4 bits de datos, con p=3 se cumple 2³=8 ≥ 4+3+1=8 (justo en el límite) → se necesitan 3 bits de paridad, total 7 bits transmitidos (código de Hamming (7,4)).",
   related:["u6-f2","u6-f6"],
   calc:{
@@ -677,7 +677,7 @@ FORMULAS["u6-f4"] = {
   name:"Código de Redundancia Cíclica (CRC)",
   latex:"T(x) = P(x) + R(x) \\qquad P(x)=X^{r}\\cdot M(x) \\qquad R(x) = \\text{resto de } \\dfrac{P(x)}{G(x)}",
   vars:[["M(x)","mensaje original, como polinomio binario"],["G(x)","polinomio generador (clave), de grado r"],["P(x)","mensaje desplazado r bits (se agregan r ceros)"],["R(x)","resto de dividir P(x) por G(x), en módulo 2 (XOR)"],["T(x)","trama a transmitir: mensaje + resto (FCS)"]],
-  explain:"El emisor desplaza el mensaje r bits a la izquierda (agrega r ceros, siendo r el grado del generador), lo divide por el generador G(x) usando aritmética módulo 2 (sin acarreo, o sea, con XOR), y transmite el mensaje original seguido del resto de esa división. El receptor repite la división de la trama completa: si el resto da 0, no hubo error; si no, se detectó un error. En la práctica no se inventa un generador cualquiera: se usan generadores estandarizados (CRC-12, CRC-16, CRC-CCITT, CRC-32) elegidos matemáticamente para garantizar la detección del 100% de los errores simples, dobles y en ráfaga de longitud ≤ al grado r del generador — CRC-32 (grado 32), por ejemplo, es el que usa Ethernet.",
+  explain:"El emisor le agrega ceros al mensaje, lo divide por un generador G(x) usando XOR, y manda el mensaje junto con el resto de esa división. El receptor repite la cuenta: si el resto da 0, todo bien; si no, hubo un error. No se usa un generador cualquiera — hay estándares (CRC-16, CRC-32, etc.) elegidos para garantizar que detecten errores simples, dobles y en ráfaga. CRC-32 es el que usa Ethernet.",
   example:"Probá abajo con el ejemplo de la cátedra: mensaje 10110111 y generador 110011.",
   related:["u6-f1"],
   special:"crc"
@@ -688,7 +688,7 @@ FORMULAS["u6-f5"] = {
   name:"Control de paridad (VRC)",
   latex:"\\sum \\text{bits de la palabra (incl. paridad)} \\equiv 0\\ (\\text{par}) \\text{ ó } 1\\ (\\text{impar}) \\pmod 2",
   vars:[["bit de paridad","bit adicional que fuerza a que la cantidad total de unos sea par (paridad par) o impar (paridad impar)"]],
-  explain:"Es el esquema de detección de errores más simple: se agrega 1 bit por carácter (VRC, vertical) para forzar que la cantidad de unos —incluyendo ese bit— sea par o impar según se acuerde. El receptor recalcula la paridad; si no coincide, sabe que hubo un error (pero no cuál bit ni puede corregirlo). Su gran debilidad: no detecta errores dobles (dos bits que cambian a la vez).",
+  explain:"El esquema más simple: se agrega 1 bit por carácter para que la cantidad de unos sea par o impar, según se acuerde. El receptor recalcula; si no coincide, hubo un error (aunque no sepa cuál bit). Su punto débil: si cambian dos bits a la vez, la paridad vuelve a dar bien y el error pasa desapercibido.",
   example:"Probá abajo con un byte de datos y el tipo de paridad elegido.",
   related:["u6-f3","u6-f4","u6-f7"],
   special:"parity"
@@ -699,7 +699,7 @@ FORMULAS["u6-f6"] = {
   name:"Construcción del código de Hamming (posiciones y síndrome)",
   latex:"\\text{posición } p_j \\text{ cubre los bits cuyo índice binario tiene el bit } j \\text{ en } 1",
   vars:[["p1,p2,p4,…","bits de paridad, ubicados en las posiciones potencia de 2 (1,2,4,8…) de la palabra completa"],["síndrome","los pⱼ recalculados en el receptor, leídos juntos como número binario: 0 = sin error, N = la posición exacta del bit dañado"]],
-  explain:"u6-f3 dice cuántos bits de paridad p hacen falta; esto es cómo se arman. Se numeran las posiciones de la palabra completa desde 1, dejando las posiciones potencia de 2 (1,2,4,8…) para los bits de paridad y el resto para los datos. Cada bit de paridad pⱼ controla exactamente las posiciones cuyo número, escrito en binario, tiene un 1 en el bit j (p1 controla 1,3,5,7…; p2 controla 2,3,6,7…; p4 controla 4,5,6,7…, etc. — por eso basta con log₂(n+p+1) bits de paridad para cubrir n+p+1 posiciones). En la recepción se recalcula cada paridad; si todas dan bien, el síndrome (los pⱼ leídos como número binario) es 0000 y no hubo error — si no, el síndrome apunta directamente, en binario, a la posición exacta del bit que se dio vuelta, así que corregirlo es tan simple como invertirlo.",
+  explain:"u6-f3 dice cuántos bits de paridad hacen falta; esto es cómo se acomodan. Se numeran las posiciones desde 1, dejando las potencias de 2 (1,2,4,8...) para paridad y el resto para datos. Cada bit de paridad controla las posiciones cuyo número en binario tiene un 1 en ese lugar. En la recepción se recalcula todo: si da 0000, no hubo error; si no, el resultado (síndrome) es directamente, en binario, la posición del bit dañado — así que corregirlo es solo invertirlo.",
   example:"Para 4 bits de datos 1011 con p=3 (código de Hamming (7,4)): se arma la palabra de 7 bits, se calculan p1,p2,p4 y se arma la palabra completa. Si se simula un error dando vuelta un bit, el síndrome recalculado en el receptor da, en binario, exactamente la posición de ese bit.",
   related:["u6-f2","u6-f3"],
   special:"hamming-builder"
@@ -710,7 +710,7 @@ FORMULAS["u6-f7"] = {
   name:"Paridad bidimensional (VRC + LRC)",
   latex:"\\text{VRC: paridad por carácter (fila)} \\quad + \\quad \\text{LRC: paridad por columna del bloque}",
   vars:[["VRC","paridad vertical: 1 bit por carácter, controla los bits de esa fila"],["LRC (BCC)","paridad longitudinal: 1 carácter extra al final del bloque, cada uno de sus bits controla una columna (la misma posición de bit en todos los caracteres del bloque)"]],
-  explain:"VRC (u6-f5) por sí solo detecta un bit erróneo en un carácter, pero es ciego a patrones que se repiten en la misma posición de varios caracteres distintos. LRC agrega, al final de un bloque de N caracteres, un carácter de verificación (BCC) donde cada bit es la paridad de esa misma posición en los N caracteres del bloque — en los hechos, es VRC pero aplicado por columna en vez de por fila. Usados juntos (paridad bidimensional), el esquema no solo detecta sino que puede corregir un único bit erróneo en todo el bloque: la fila que falla en su VRC y la columna que falla en su LRC se cruzan exactamente en el bit dañado.",
+  explain:"VRC solo detecta un bit erróneo por carácter, pero no ve patrones que se repiten en la misma posición de varios caracteres. LRC agrega un carácter extra al final del bloque: es la misma idea que VRC, pero calculada por columna en vez de por fila. Usados juntos, el esquema puede corregir un único bit erróneo en todo el bloque — la fila y la columna que fallan se cruzan justo en ese bit.",
   example:"Bloque de 4 caracteres de 7 bits cada uno: si falla la paridad VRC de la fila 2 y la paridad LRC de la columna 5, el bit erróneo está, sin ambigüedad, en la fila 2 columna 5 — alcanza con invertirlo para corregirlo.",
   related:["u6-f5"],
   special:"parity2d"
@@ -724,7 +724,7 @@ FORMULAS["u7-f1"] = {
   name:"Bits por elemento de señal (baudio)",
   latex:"n = \\log_2 N \\qquad N = 2^{n}",
   vars:[["N","cantidad de niveles (o elementos) distintos que puede tomar la señal"],["n","bits que representa cada elemento de señal (bits/baudio)"]],
-  explain:"Es la misma relación logarítmica de Nyquist (Unidad 5) y de la modulación M-aria (Unidad 8), vista desde el punto de vista de cuántos bits 'caben' en cada símbolo transmitido. Con 2 niveles cada símbolo transporta 1 bit; con 4 niveles, 2 bits (dibits); con 8, 3 bits (tribits), y así sucesivamente.",
+  explain:"Lo mismo que Nyquist, pero visto desde cuántos bits entran en cada símbolo. Con 2 niveles, 1 bit por símbolo; con 4 niveles, 2 bits (dibits); con 8, 3 bits (tribits); y así.",
   example:"N=4 elementos de señal (por ejemplo, 4 niveles de tensión) → n=log₂4=2 bits por cada elemento transmitido.",
   related:["u5-f2","u7-f2","u8-f2","u9-f1"],
   calc:{
@@ -741,7 +741,7 @@ FORMULAS["u7-f2"] = {
   name:"Tasa de bits a partir de la tasa de símbolos",
   latex:"R = r \\times n \\qquad [\\text{bps}]",
   vars:[["R","tasa de bits o velocidad de transmisión (bps)"],["r","tasa de símbolos o de señal (Baud)"],["n","bits por elemento de señal = log₂N"]],
-  explain:"Distingue explícitamente entre la 'tasa de bit' (bps, lo que realmente le importa al usuario) y la 'tasa de símbolo' o baudios (cuántas veces por segundo cambia la línea de transmisión). Son iguales sólo cuando cada símbolo representa 1 bit (N=2); si se usan más niveles por símbolo, la tasa de bits supera a la tasa de baudios sin necesitar más ancho de banda — la misma idea que Nyquist (Unidad 5) y que las modulaciones M-arias (Unidad 8/9).",
+  explain:"Separa dos cosas que se suelen confundir: la tasa de bit (bps, lo que importa en la práctica) y la tasa de símbolo o baudios (cuántas veces cambia la línea por segundo). Son iguales solo si cada símbolo es 1 bit; con más niveles por símbolo, la tasa de bits supera a los baudios sin necesitar más ancho de banda.",
   example:"Canal de r=1200 baudios con N=8 niveles (n=3 bits/baudio): R = 1200 × 3 = 3600 bps.",
   related:["u5-f2","u7-f1","u8-f2","u9-f1"],
   calc:{
@@ -766,7 +766,7 @@ FORMULAS["u7-f3"] = {
   name:"Ancho de banda a partir del rango de frecuencias",
   latex:"B = \\Delta f = f_2-f_1",
   vars:[["f1, f2","frecuencias mínima y máxima del rango que ocupa la señal/canal"],["B","ancho de banda (Hz)"]],
-  explain:"Es la definición operativa del ancho de banda ya presentada conceptualmente en la Unidad 2: simplemente el rango entre la frecuencia más alta y la más baja que el canal deja pasar (o que ocupa la señal). Es el dato de entrada directo de Nyquist y Shannon (Unidad 5), y determina cuánta información se puede transmitir por ese canal.",
+  explain:"Lo mismo que se vio conceptualmente en la Unidad 2, pero bien concreto: la diferencia entre la frecuencia más alta y la más baja que el canal deja pasar. Es el dato de entrada de Nyquist y Shannon.",
   example:"Un canal de voz que va de 300 Hz a 3400 Hz tiene B = 3400−300 = 3100 Hz.",
   related:["u2-f2","u5-f2","u5-f3","u8-f1"],
   calc:{
@@ -795,7 +795,7 @@ FORMULAS["u7-f4"] = {
     ["B8ZS","igual que AMI, pero cada tirada de 8 ceros se reemplaza por un patrón con 2 violaciones de bipolaridad intencionales, para que el receptor nunca pierda el sincronismo"],
     ["HDB3","igual que AMI, pero cada tirada de 4 ceros se reemplaza por un patrón con 1 violación de bipolaridad, alternando la polaridad de esas violaciones para no acumular continua"]
   ],
-  explain:"Es el paso final de la Unidad 7: una vez que se sabe cuántos bits entran en cada elemento de señal (n=log₂N) y a qué tasa se transmiten (R=r·n), hay que decidir *cómo se dibuja* cada bit en la línea física. Los códigos de línea son las distintas convenciones para representar 0s y 1s como niveles de tensión. NRZ es simple pero no auto-sincroniza (tiradas largas de 0 o 1 no generan transiciones) y puede tener componente de continua. RZ agrega una transición por bit pero duplica el ancho de banda necesario. Manchester (el usado históricamente en Ethernet 802.3) garantiza siempre una transición a mitad de cada bit, lo que permite que el receptor recupere el reloj (self-clocking) sin componente de continua, a costa de necesitar el doble de ancho de banda que NRZ para la misma tasa de bits. Manchester diferencial agrega además inmunidad a la inversión de polaridad de los cables. AMI evita continua alternando la polaridad de los unos, pero tiene el mismo problema que NRZ-L con tiradas largas de ceros (no hay transiciones, se pierde el reloj); B8ZS y HDB3 son las correcciones de AMI que usan las redes de telefonía digital real (T1/E1): sustituyen esas tiradas de ceros por un patrón con alguna 'violación' de bipolaridad deliberada, detectable por el receptor como la señal de que ahí había ceros, sin perder nunca el sincronismo. Existen además códigos multinivel (2B1Q, 8B6T, 4D-PAM5, MLT-3) usados en xDSL y Ethernet de alta velocidad, que agrupan varios bits por símbolo para necesitar menos ancho de banda.",
+  explain:"Una vez que sabés cuántos bits entran en cada símbolo y a qué tasa se transmiten, falta decidir cómo se dibuja cada bit en la línea física — eso son los códigos de línea. NRZ es simple pero no se auto-sincroniza: una tirada larga de ceros o unos no genera transiciones, y el receptor puede perder el reloj. RZ soluciona eso agregando una transición por bit, a costa de más ancho de banda. Manchester (el de Ethernet clásico) siempre tiene una transición a mitad de bit, así el receptor nunca pierde el reloj, pero también necesita el doble de ancho de banda que NRZ. AMI alterna la polaridad de los unos para evitar continua, aunque sigue teniendo el problema de las tiradas largas de ceros — B8ZS y HDB3 lo arreglan sustituyendo esas tiradas por un patrón detectable, sin perder nunca el sincronismo.",
   example:"Para la trama 1 0 1 1 0 0 1, Manchester queda: ↑↓ (1) · ↓↑ (0) · ↑↓ (1) · ↑↓ (1) · ↓↑ (0) · ↓↑ (0) · ↑↓ (1) — siempre con una transición a mitad de cada bit. Probá distintas tramas en el graficador de abajo y compará las 6 codificaciones una debajo de la otra.",
   related:["u7-f1","u7-f2","u8-f1"],
   special:"linecode"
@@ -809,7 +809,7 @@ FORMULAS["u8-f1"] = {
   name:"Ancho de banda necesario según el tipo de modulación digital",
   latex:"B_{ASK}=B_{PSK}\\approx 2r \\qquad B_{FSK}\\approx 2(\\Delta f + r)",
   vars:[["r","tasa de símbolos (Baud)"],["Δf","desviación de frecuencia entre las dos frecuencias de FSK"],["B","ancho de banda necesario para transmitir esa modulación (Hz)"]],
-  explain:"Cada técnica de modulación digital 'ocupa' un ancho de banda distinto en función de la tasa de símbolos con la que se transmite. ASK y PSK son las más eficientes en ancho de banda (ocupan aproximadamente el doble de la tasa de baudios); FSK necesita además espacio adicional para separar las dos frecuencias que representan 0 y 1, por eso incorpora el término 2Δf. Es la contracara, en modulación, del ancho de banda visto de forma abstracta en las Unidades 2, 3, 5 y 7.",
+  explain:"Cada modulación ocupa distinto ancho de banda según su tasa de símbolos. ASK y PSK son las más eficientes (el doble de la tasa de baudios); FSK necesita espacio extra para separar las dos frecuencias que representan 0 y 1, de ahí el término 2Δf.",
   example:"Con r=5 Baudios: ASK/PSK necesitan B≈10 Hz. Si además Δf=5 Hz, FSK necesita B≈2(5+5)=20 Hz.",
   related:["u2-f2","u7-f3","u5-f2","u5-f3"],
   calc:{
@@ -834,7 +834,7 @@ FORMULAS["u8-f2"] = {
   name:"Bits por símbolo en modulaciones M-arias",
   latex:"n = \\log_2 M",
   vars:[["M","cantidad de símbolos posibles (fases, amplitudes o combinaciones)"],["n","bits que representa cada símbolo"]],
-  explain:"Es la aplicación directa, a la modulación digital, de la relación n=log₂N ya vista en la Unidad 7. En ASK/FSK/PSK binarios M=2 (n=1 bit/símbolo); en 4PSK o QPSK, M=4 (n=2 bits/símbolo, agrupados en dibits); en 8-QAM, M=8 (n=3 bits/símbolo, tribits), etc.",
+  explain:"La misma relación n=log₂N de la Unidad 7, aplicada a modulación. Binario (M=2) da 1 bit/símbolo; QPSK (M=4) da 2 bits (dibits); 8-QAM (M=8) da 3 bits (tribits), y así.",
   example:"4PSK: hay 4 fases de salida posibles (135°, 225°, 45°, 315°), cada una representando un dibit (00, 01, 10, 11) → n=log₂4=2 bits/símbolo.",
   related:["u7-f1","u8-f3"],
   calc:null
@@ -845,7 +845,7 @@ FORMULAS["u8-f3"] = {
   name:"Símbolos posibles en n-QAM",
   latex:"M \\le N^{\\circ}\\text{Fases} \\times N^{\\circ}\\text{Amplitudes}",
   vars:[["M","cantidad máxima de símbolos distintos que admite el esquema QAM"],["N° Fases","cantidad de fases distintas disponibles"],["N° Amplitudes","cantidad de amplitudes distintas disponibles"]],
-  explain:"QAM combina modulación de amplitud y de fase a la vez (ASK + PSK), de forma de maximizar el contraste entre símbolos vecinos. Como los cambios de amplitud son más sensibles al ruido que los de fase, en la práctica siempre se usan más niveles de fase que de amplitud. Existen esquemas estándar de 8-QAM, 16-QAM, 32-QAM, 64-QAM, etc.",
+  explain:"QAM mezcla amplitud y fase (ASK + PSK) para separar mejor los símbolos entre sí. Como la amplitud es más sensible al ruido que la fase, siempre se usan más niveles de fase que de amplitud.",
   example:"Con 4 fases y 2 amplitudes: M ≤ 4×2 = 8 símbolos posibles (8-QAM).",
   related:["u8-f2","u5-f5"],
   calc:{
@@ -865,7 +865,7 @@ FORMULAS["u8-f4"] = {
   name:"QAM vs SNR (misma relación de Shannon-Hartley)",
   latex:"M = \\sqrt{SNR+1} \\qquad n=\\log_2 M \\;[\\text{bits/símbolo}]",
   vars:[["SNR","relación señal/ruido del canal, en veces"],["M","niveles QAM que ese canal puede soportar sin superar el límite de Shannon"]],
-  explain:"Es exactamente la misma fórmula M=√(1+SNR) de la Unidad 5, aplicada aquí de forma muy concreta: dado el SNR de un canal, indica cuántos niveles de QAM (o de cuantificación PCM) puede soportar como máximo sin violar el límite de Shannon. Es la pregunta inversa también válida: dado un esquema con cierto M, qué SNR mínimo se necesita.",
+  explain:"La misma M=√(1+SNR) de la Unidad 5, aplicada concretamente: dado el SNR de un canal, cuántos niveles de QAM soporta sin pasarse del límite de Shannon. También sirve al revés: dado un M, qué SNR mínimo hace falta.",
   example:"SNR=255 veces → M=√256=16 → 16-QAM, con n=log₂16=4 bits/símbolo.",
   related:["u5-f5","u5-f3","u8-f3"],
   calc:{
@@ -886,7 +886,7 @@ FORMULAS["u8-f5"] = {
   name:"Condición de muestreo de Nyquist",
   latex:"f_s \\ge 2f_{MAX} \\qquad T_s \\le \\dfrac{1}{2f_{MAX}}",
   vars:[["fMAX","máxima frecuencia contenida en la señal analógica a muestrear"],["fs","frecuencia de muestreo mínima para poder reconstruir la señal"]],
-  explain:"Antes de convertir una señal analógica a PCM hay que muestrearla y, para poder reconstruirla exactamente del lado del receptor, la frecuencia de muestreo debe ser al menos el doble de la máxima frecuencia presente en la señal (por eso se filtra la señal antes de muestrear, limitándola a fMAX). Es el mismo criterio de Nyquist de la Unidad 5, aplicado ahora a PCM.",
+  explain:"Para poder reconstruir bien una señal del lado del receptor, hay que muestrearla al menos al doble de su frecuencia máxima. Es el mismo Nyquist de la Unidad 5, aplicado a PCM.",
   example:"Voz telefónica limitada a fMAX=4000 Hz → fs mínima = 8000 Hz (el estándar real de telefonía digital).",
   related:["u5-f1","u5-f2","u8-f6"],
   calc:{
@@ -906,7 +906,7 @@ FORMULAS["u8-f6"] = {
   name:"PCM — niveles de cuantificación y velocidad del canal",
   latex:"M = 2^{n} \\qquad C = f_s \\times n \\quad [\\text{bps}]",
   vars:[["n","bits usados para codificar cada muestra"],["M","cantidad de niveles de cuantificación disponibles"],["fs","frecuencia de muestreo (Hz)"],["C","velocidad de bit resultante del canal PCM (bps)"]],
-  explain:"El PCM (Modulación de Pulsos Codificados) consta de tres pasos: muestreo, cuantificación y codificación. Cada muestra se representa con n bits, lo que da M=2ⁿ niveles de cuantificación posibles. La velocidad final del canal digital es simplemente el producto entre cuántas muestras se toman por segundo (fs) y cuántos bits usa cada una (n) — la misma estructura que R=r×n de la Unidad 7, aplicada a PCM. Un detalle que el estándar G.711 resuelve con algo más que fuerza bruta: si se cuantificara con pasos todos iguales (cuantificación uniforme), las señales de baja amplitud (una voz suave) quedarían mal representadas, con mucho error relativo, mientras que las de alta amplitud sobrarían de precisión. Por eso se usa cuantificación no uniforme (companding): antes de cuantificar, la señal pasa por una curva logarítmica que comprime los niveles altos y expande los bajos (Ley A, 13 segmentos, usada en Europa/Argentina; Ley μ, 15 segmentos, usada en EE.UU./Japón), dándole más resolución relativa a las amplitudes chicas, que son las más frecuentes en la voz humana. 30 canales de voz de 64kbps más 2 de señalización arman un E1 de 2,048 Mbps — la base de la jerarquía digital PDH/SDH usada en telefonía.",
+  explain:"PCM tiene tres pasos: muestreo, cuantificación y codificación. Cada muestra se representa con n bits (M=2ⁿ niveles), y la velocidad del canal es simplemente fs×n — la misma lógica de R=r×n de la Unidad 7. Un detalle del estándar G.711: en vez de cuantificar en pasos todos iguales, la señal pasa primero por una curva logarítmica (Ley A o Ley μ) que le da más resolución a las amplitudes bajas, las más comunes en la voz humana.",
   example:"Telefonía: fs=8000 Hz, n=8 bits/muestra (M=256 niveles, estándar G.711 con Ley A / Ley µ) → C = 8000×8 = 64.000 bps = 64 Kbps.",
   related:["u7-f2","u8-f5"],
   calc:{
@@ -930,7 +930,7 @@ FORMULAS["u8-f7"] = {
   name:"Diagrama de constelación",
   latex:"\\text{símbolo} \\to (A\\cos\\theta,\\; A\\sin\\theta) \\quad \\text{en el plano fase-amplitud}",
   vars:[["A","amplitud del símbolo (distancia al origen)"],["θ","fase del símbolo (ángulo respecto al eje de referencia)"],["M","cantidad de símbolos — cada uno es un punto fijo del plano"]],
-  explain:"Es la forma estándar de visualizar cualquier modulación digital: cada símbolo posible se dibuja como un punto en el plano fase-amplitud (eje real/imaginario, o I/Q). En PSK todos los puntos están a la misma distancia del origen (misma amplitud, distinta fase) porque solo se modula fase; en ASK están todos sobre el mismo eje (misma fase, distinta amplitud); QAM combina ambas, acomodando los puntos en una grilla para maximizar la distancia mínima entre símbolos vecinos — esa distancia mínima es, en los hechos, lo que determina qué tan robusta es la modulación frente al ruido (más símbolos amontonados = más sensible a un mismo nivel de ruido, ver u8-f4).",
+  explain:"Es la forma estándar de ver una modulación digital: cada símbolo es un punto en el plano fase-amplitud. En PSK todos los puntos están a la misma distancia del origen (solo cambia la fase); en ASK, todos en el mismo eje (solo cambia la amplitud); QAM combina las dos. Lo importante es la distancia mínima entre símbolos vecinos: cuanto más amontonados, más fácil que el ruido los confunda.",
   example:"QPSK (4-PSK) tiene 4 puntos a 45°, 135°, 225° y 315°, todos a la misma distancia del origen. 16-QAM tiene 16 puntos acomodados en una grilla de 4×4, con distintas combinaciones de amplitud y fase. Elegí el esquema abajo y mirá cómo cambia la distancia entre símbolos vecinos.",
   related:["u8-f2","u8-f3","u8-f4"],
   special:"constellation"
@@ -944,7 +944,7 @@ FORMULAS["u9-f1"] = {
   name:"Velocidad de un módem M-ario",
   latex:"R = \\dfrac{1}{T_s}\\times\\log_2 M \\quad [\\text{bps}]",
   vars:[["Ts","tiempo de símbolo del módem (s)"],["M","cantidad de niveles/estados de modulación del módem"],["R","velocidad de transmisión de datos (bps)"]],
-  explain:"Es la fórmula R=r×n de la Unidad 7 escrita en términos del período de símbolo (r=1/Ts) tal como se especifica un módem real. Los módems de la serie V (ITU-T) alcanzan altas velocidades de bit no por usar más ancho de banda, sino por codificar más bits en cada símbolo (M alto) sobre la misma línea telefónica.",
+  explain:"Es R=r×n de la Unidad 7, escrita como se especifica un módem real (r=1/Ts). Los módems de la serie V no llegan a velocidades altas usando más ancho de banda, sino metiendo más bits en cada símbolo sobre la misma línea telefónica.",
   example:"Un módem con Ts=200 ms y M=8 estados: r=1/0,2=5 Baudios, R = 5×log₂8 = 15 bps.",
   related:["u7-f1","u7-f2","u5-f2"],
   calc:{
@@ -970,7 +970,7 @@ FORMULAS["u9-f2"] = {
   name:"Velocidad máxima teórica DMT (xDSL)",
   latex:"V = N_{subcanales}\\times \\Delta f_{subcanal}\\times \\text{bits}_{subcanal}",
   vars:[["Nsubcanales","cantidad de subcanales (subportadoras) usados por DMT"],["Δf subcanal","ancho de banda de cada subcanal (Hz)"],["bits subcanal","bits que transporta cada subcanal por símbolo"]],
-  explain:"La técnica DMT (Discrete MultiTone) usada en xDSL divide el ancho de banda disponible en muchos subcanales angostos y modula cada uno de forma independiente (como una gran FDM de mini-canales QAM). La velocidad máxima teórica es la suma de lo que aporta cada subcanal — la misma lógica de 'bits por símbolo × cantidad de símbolos' de las Unidades 7 y 8, multiplicada por la cantidad de subcanales en paralelo.",
+  explain:"DMT divide el ancho de banda en muchos subcanales angostos y modula cada uno por separado, como una FDM de mini-canales QAM. La velocidad total es simplemente la suma de lo que aporta cada subcanal.",
   example:"ADSL clásico: 224 subcanales de 4 kHz con 15 bits cada uno → V = 224×4000×15 = 13,44 Mbps (downstream); con 24 subcanales para upstream → 24×4000×15 = 1,44 Mbps.",
   related:["u7-f2","u8-f2"],
   calc:{
@@ -995,7 +995,7 @@ FORMULAS["u9-f3"] = {
   name:"Asignación de bits por subportadora (bit-loading DMT)",
   latex:"\\text{bits}_k = \\log_2(1+SNR_k) \\quad \\text{(redondeado, por subportadora } k\\text{)}",
   vars:[["SNRk","relación señal/ruido medida en la subportadora k (varía según el tramo de línea e interferencias)"],["bitsk","bits que esa subportadora puede transportar por símbolo, entre 2 (4-QAM) y 14-15 (16384-QAM)"]],
-  explain:"u9-f2 calcula la velocidad total de DMT asumiendo que todos los subcanales transportan la misma cantidad de bits — en la realidad no es así: el módem mide la SNR de cada una de las ~256 subportadoras por separado (igual que Shannon-Hartley, u5-f5, pero subcanal por subcanal) y le asigna a cada una tantos bits como esa SNR puntual permita, desde un mínimo de 2 (4-QAM) hasta un máximo de 14 o 15 (16384-QAM o 32768-QAM). El resultado es un perfil de 'bits por portadora' muy irregular: las subportadoras en frecuencias limpias cargan muchos bits, y las que caen en una banda con interferencia (un ruido de línea, una emisora de radio AM cercana) se hunden a 0 o pocos bits — el módem simplemente las evita o las usa poco, sin perder la conexión entera.",
+  explain:"u9-f2 asume que todos los subcanales cargan la misma cantidad de bits, pero en la realidad no es así: el módem mide la SNR de cada subportadora por separado y le asigna tantos bits como esa SNR permita. El resultado es un perfil bien irregular — las frecuencias limpias cargan muchos bits, y las que caen en una zona con interferencia bajan a casi nada, sin perder la conexión entera.",
   example:"Con una interferencia fuerte entre 80kHz y 120kHz, las subportadoras de esa franja (números 19 a 28 aproximadamente, a 4,3125kHz cada una) caen a 0-2 bits, mientras que el resto de la banda sigue cargando 12-14 bits; la velocidad total es la suma de todas, no la de la peor.",
   related:["u9-f2","u5-f5"],
   special:"dmt-bitload"
