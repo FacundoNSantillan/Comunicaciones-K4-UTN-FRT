@@ -4,10 +4,6 @@ Trabajo Final Integrador de Comunicaciones, UTN-FRT 2026.
 
 La idea del proyecto fue bastante directa: durante el cursado las fórmulas quedan repartidas en varios apuntes y, cuando llega el momento de repasar, cuesta encontrar qué usar y para qué. Esta página junta las nueve unidades en un solo lugar para tener una guía más práctica al estudiar.
 
-## Repositorio
-
-[github.com/FacundoNSantillan/Comunicaciones-K4-UTN-FRT](https://github.com/FacundoNSantillan/Comunicaciones-K4-UTN-FRT)
-
 ## Sitio online
 
 [comunicaciones-k4-utn-frt.vercel.app](https://comunicaciones-k4-utn-frt.vercel.app/)
@@ -48,6 +44,6 @@ La mayor parte del contenido está en `data.js`. Si se quiere agregar una fórmu
 
 ## Integrantes
 
-- Facundo Santillán
-- Nahuel Martín Peñaloza
-- César Augusto Geréz
+Facundo Nahuel Santillán - Legajo 52405 
+Santiago Martín Peñaloza - Legajo 52581 
+César Augusto Geréz - Legajo 25243
