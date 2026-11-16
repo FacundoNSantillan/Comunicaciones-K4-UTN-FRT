@@ -44,6 +44,6 @@ La mayor parte del contenido está en `data.js`. Si se quiere agregar una fórmu
 
 ## Integrantes
 
--Facundo Nahuel Santillán - Legajo 52405 
--Santiago Martín Peñaloza - Legajo 52581 
--César Augusto Geréz - Legajo 25243
+- Santillán Facundo Nahuel - Legajo 52405
+- Martín Peñaloza Santiago - Legajo 52581
+- Geréz César Augusto - Legajo 25243
