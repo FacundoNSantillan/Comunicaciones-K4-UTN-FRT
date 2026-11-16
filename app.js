@@ -103,6 +103,66 @@ function renderCard(f){
 }
 
 // ---------------------------------------------------------------
+// Unit quizzes
+// ---------------------------------------------------------------
+function renderQuiz(u){
+  const questions = QUIZZES[u.id];
+  if(!questions || !questions.length) return '';
+  return `<section class="unit-quiz" id="quiz-${u.id}" aria-label="Quiz de la Unidad ${u.num}">
+    <div class="quiz-head">
+      <div>
+        <div class="quiz-kicker">AUTOEVALUACIÓN</div>
+        <h3>Probá lo que viste en la Unidad ${u.num}</h3>
+      </div>
+      <span class="quiz-progress" id="quiz-progress-${u.id}">1 / ${questions.length}</span>
+    </div>
+    <p class="quiz-intro">Tres preguntas breves: una mezcla de teoría y aplicación.</p>
+    <div class="quiz-question" id="quiz-question-${u.id}"></div>
+  </section>`;
+}
+
+function mountUnitQuiz(u){
+  const questions = QUIZZES[u.id];
+  const slot = document.getElementById('quiz-question-'+u.id);
+  if(!slot || !questions?.length) return;
+  const progress = document.getElementById('quiz-progress-'+u.id);
+  let current = 0;
+  let score = 0;
+
+  function render(){
+    if(current >= questions.length){
+      const label = score===questions.length ? '¡Excelente!' : score>=2 ? 'Muy bien.' : 'Buen intento.';
+      slot.innerHTML = `<div class="quiz-result"><strong>${label}</strong><span>Resultado: ${score} de ${questions.length} correctas.</span><button type="button" class="quiz-restart">Volver a intentar</button></div>`;
+      progress.textContent = 'Completado';
+      slot.querySelector('.quiz-restart').addEventListener('click', ()=>{ current=0; score=0; render(); });
+      return;
+    }
+    const item = questions[current];
+    progress.textContent = `${current+1} / ${questions.length}`;
+    slot.innerHTML = `<div class="quiz-prompt">${item.q}</div>
+      <div class="quiz-options">${item.options.map((option,index)=>`<button type="button" class="quiz-option" data-answer="${index}"><span>${String.fromCharCode(65+index)}</span>${option}</button>`).join('')}</div>
+      <div class="quiz-feedback" aria-live="polite"></div>`;
+    slot.querySelectorAll('.quiz-option').forEach(button=>{
+      button.addEventListener('click', ()=>{
+        const answer = Number(button.dataset.answer);
+        const correct = answer===item.correct;
+        slot.querySelectorAll('.quiz-option').forEach(option=>{
+          option.disabled = true;
+          if(Number(option.dataset.answer)===item.correct) option.classList.add('correct');
+        });
+        if(!correct) button.classList.add('wrong');
+        if(correct) score++;
+        const feedback = slot.querySelector('.quiz-feedback');
+        feedback.className = `quiz-feedback ${correct?'ok':'no'}`;
+        feedback.innerHTML = `<strong>${correct?'Correcto.':'No exactamente.'}</strong> ${item.why}<button type="button" class="quiz-next">${current===questions.length-1?'Ver resultado':'Siguiente pregunta'}</button>`;
+        feedback.querySelector('.quiz-next').addEventListener('click', ()=>{ current++; render(); });
+      }, {once:true});
+    });
+  }
+  render();
+}
+
+// ---------------------------------------------------------------
 // Generic numeric calculator engine
 // ---------------------------------------------------------------
 function mountGenericCalc(f){
@@ -1244,6 +1304,7 @@ function viewUnit(id){
     html += renderCard(FORMULAS[fid]);
   });
 
+  html += renderQuiz(u);
   html += `<footer class="credit">UNIDAD ${u.num} · ${u.name} — UTN-FRT · ISI · Comunicaciones${SITE_CREDIT}</footer>`;
   content.innerHTML = html;
 
@@ -1251,6 +1312,7 @@ function viewUnit(id){
     content.querySelectorAll('.dblock').forEach(b=>b.addEventListener('click', ()=>goTo(b.dataset.target)));
   }
   mountAllCalcs();
+  mountUnitQuiz(u);
   attachChipHandlers();
   setActiveNav(id);
 }

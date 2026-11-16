@@ -89,6 +89,55 @@ const UNITS = [
   }
 ];
 
+// Preguntas breves para cerrar cada unidad: mezclan una idea teórica y un caso práctico.
+const QUIZZES = {
+  u1: [
+    {q:"En una llamada telefónica, ¿qué modo de comunicación se usa?", options:["Simplex","Half-duplex","Full-duplex"], correct:2, why:"Ambas personas pueden hablar y escuchar al mismo tiempo."},
+    {q:"¿Qué bloque adapta la información antes de enviarla por el canal?", options:["Fuente","Transmisor","Destino"], correct:1, why:"El transmisor codifica o adapta la información para el medio."},
+    {q:"Una red dentro de un edificio es normalmente una…", options:["PAN","LAN","WAN"], correct:1, why:"Una LAN cubre un área local, como un edificio o un campus."}
+  ],
+  u2: [
+    {q:"¿Qué permite hacer la serie de Fourier con una señal periódica?", options:["Separarla en armónicos","Eliminar todo el ruido","Aumentar su potencia"], correct:0, why:"La representa como suma de senos y cosenos de distintas frecuencias."},
+    {q:"La voz telefónica ocupa aproximadamente de 300 Hz a 3400 Hz. ¿Cuál es su ancho de banda?", options:["310 Hz","3100 Hz","3700 Hz"], correct:1, why:"El ancho de banda es f₂ − f₁: 3400 − 300 = 3100 Hz."},
+    {q:"Si agregás más armónicos a una onda cuadrada, la aproximación…", options:["Se parece más a la original","Pierde frecuencia","Queda constante"], correct:0, why:"Cada armónico aporta detalle a la forma de onda."}
+  ],
+  u3: [
+    {q:"Una pérdida de −3 dB equivale aproximadamente a…", options:["Duplicar la potencia","Reducir la potencia a la mitad","Perder toda la señal"], correct:1, why:"−3 dB representa una relación de potencia cercana a 0,5."},
+    {q:"Si aumenta el ruido y la señal queda igual, la SNR…", options:["Aumenta","Disminuye","No cambia"], correct:1, why:"La SNR compara señal contra ruido: más ruido implica una relación menor."},
+    {q:"¿Qué describe mejor la distorsión?", options:["Agrega energía aleatoria","Cambia la forma de la señal","Siempre corta la comunicación"], correct:1, why:"La distorsión modifica una señal que ya existe; el ruido agrega componentes no deseados."}
+  ],
+  u4: [
+    {q:"Un símbolo muy improbable aporta…", options:["Más información","Menos información","Siempre 1 bit"], correct:0, why:"Una sorpresa mayor aporta más información."},
+    {q:"¿Qué busca Huffman al codificar una fuente?", options:["Usar palabras más largas siempre","Reducir la longitud media del código","Eliminar símbolos"], correct:1, why:"Asigna códigos más cortos a los símbolos más frecuentes."},
+    {q:"Una fuente con símbolos equiprobables tiene una entropía…", options:["Alta para esa cantidad de símbolos","Igual a cero","Negativa"], correct:0, why:"Cuando no hay un símbolo más predecible que otro, la incertidumbre es máxima."}
+  ],
+  u5: [
+    {q:"¿Qué teorema se usa para un canal ideal sin ruido?", options:["Nyquist","Shannon","Hamming"], correct:0, why:"Nyquist limita la tasa por ancho de banda y cantidad de niveles, sin considerar ruido."},
+    {q:"Si un canal tiene más SNR y el mismo ancho de banda, Shannon indica que su capacidad…", options:["Aumenta","Disminuye","Es siempre igual"], correct:0, why:"Una mejor relación señal/ruido permite transmitir más información confiable."},
+    {q:"Para una señal de 4 kHz, la frecuencia mínima de muestreo es…", options:["2 kHz","4 kHz","8 kHz"], correct:2, why:"Nyquist pide al menos el doble de la frecuencia máxima."}
+  ],
+  u6: [
+    {q:"El BER mide…", options:["Bits erróneos sobre bits transmitidos","El ancho de banda","La potencia de una antena"], correct:0, why:"BER es la tasa de bits recibidos con error."},
+    {q:"¿Qué puede hacer un Hamming (7,4) ante un error de un bit?", options:["Detectarlo y corregirlo","Solo detectarlo","Ignorarlo"], correct:0, why:"El síndrome señala la posición del bit que debe corregirse."},
+    {q:"CRC se basa principalmente en…", options:["Una división módulo 2 con XOR","Promediar bits","Cambiar amplitudes"], correct:0, why:"El emisor y receptor dividen usando XOR para verificar el resto."}
+  ],
+  u7: [
+    {q:"Si hay 8 niveles de señal, ¿cuántos bits representa cada símbolo?", options:["2","3","8"], correct:1, why:"log₂(8) = 3 bits por símbolo."},
+    {q:"Un canal de 1200 baudios con 2 bits por símbolo transmite…", options:["600 bps","1200 bps","2400 bps"], correct:2, why:"R = r × n = 1200 × 2."},
+    {q:"¿Qué ventaja práctica tiene Manchester?", options:["Ayuda a recuperar el reloj","No usa transiciones","Elimina todo ruido"], correct:0, why:"Incluye una transición en medio de cada bit, útil para sincronizar."}
+  ],
+  u8: [
+    {q:"QAM combina principalmente…", options:["Amplitud y fase","Frecuencia y temperatura","Tiempo y ruido"], correct:0, why:"QAM usa distintas amplitudes y fases para representar símbolos."},
+    {q:"En PCM con 8 bits por muestra hay…", options:["8 niveles","64 niveles","256 niveles"], correct:2, why:"La cantidad de niveles es 2ⁿ: 2⁸ = 256."},
+    {q:"FDM permite compartir un canal separando señales por…", options:["Frecuencia","Contraseña","Color"], correct:0, why:"Cada señal ocupa una banda de frecuencia diferente."}
+  ],
+  u9: [
+    {q:"¿Qué equipo convierte datos digitales en una señal apta para el medio?", options:["Módem","Router solamente","Monitor"], correct:0, why:"El módem modula y demodula para adaptar los datos al canal."},
+    {q:"DMT en ADSL divide el canal en…", options:["Un único pulso","Muchos subcanales","Dos cables nuevos"], correct:1, why:"Cada subportadora puede llevar una cantidad distinta de bits."},
+    {q:"En xDSL, al alejarse de la central normalmente la velocidad…", options:["Aumenta","Disminuye","No depende del cable"], correct:1, why:"El cobre atenúa más las frecuencias altas a mayor distancia."}
+  ]
+};
+
 // A quick lookup index built at runtime: FORMULAS[id] -> formula obj
 const FORMULAS = {};
 
